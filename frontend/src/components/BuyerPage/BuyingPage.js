@@ -2,18 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import AppHeader from "../common/Header";
 import { Layout, Menu } from "antd";
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
 
-import PersonalCenter from "../common/PersonalCenter";
 import OrderCenter from "./OrderCenter";
 
 const { Header, Content, Footer, Sider } = Layout;
