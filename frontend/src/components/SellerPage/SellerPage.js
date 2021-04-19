@@ -14,6 +14,7 @@ import {
 
 import AppHeader from "../common/Header";
 import { useInformationCenter } from "../common/useInformationCenter";
+import AppFooter from "../common/Footer";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -60,9 +61,7 @@ export default function SellerPage() {
             <InformationCenter />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <AppFooter />
       </Layout>
     </Layout>
   );

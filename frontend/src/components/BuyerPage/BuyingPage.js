@@ -4,6 +4,7 @@ import AppHeader from "../common/Header";
 import { Layout, Menu } from "antd";
 
 import OrderCenter from "./OrderCenter";
+import AppFooter from "../common/Footer";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -38,7 +39,7 @@ export default function BuyingPage() {
             <OrderCenter />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>数据库课程设计</Footer>
+        <AppFooter />
       </Layout>
     </Layout>
   );
