@@ -6,7 +6,6 @@ import Register from "../src/components/common/Register";
 import BuyingPage from "../src/components/BuyerPage/BuyingPage";
 import SellerPage from "./components/SellerPage/SellerPage";
 import AdministratorPage from "./components/AdministratorPage/AdministratorPage";
-import OrderCenter from "./components/BuyerPage/OrderCenter";
 
 function App() {
   return (

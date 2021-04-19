@@ -34,15 +34,9 @@ export default function BuyingPage() {
           <AppHeader />
         </Header>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            市场
-          </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            订单中心
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            个人中心
-          </Menu.Item>
+          <Menu.Item key="1">市场</Menu.Item>
+          <Menu.Item key="2">订单中心</Menu.Item>
+          <Menu.Item key="3">个人中心</Menu.Item>
         </Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
@@ -55,9 +49,7 @@ export default function BuyingPage() {
             <OrderCenter />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <Footer style={{ textAlign: "center" }}>数据库课程设计</Footer>
       </Layout>
     </Layout>
   );
