@@ -1,16 +1,13 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { Layout } from "antd";
+
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import AppHeader from "./Header";
-const { Header, Footer, Content } = Layout;
+import { Layout } from "antd";
+const { Content } = Layout;
 
 export default function Login() {
   return (
     <Layout>
-      <Header>
-        <AppHeader />
-      </Header>
       <Content>
         <Form
           name="normal_login"
@@ -62,7 +59,6 @@ export default function Login() {
           </Form.Item>
         </Form>
       </Content>
-      <Footer>Footer</Footer>
     </Layout>
   );
 }

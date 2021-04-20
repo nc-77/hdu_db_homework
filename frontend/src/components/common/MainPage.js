@@ -2,16 +2,12 @@ import React from "react";
 import { Button } from "antd";
 import "antd/dist/antd.css";
 import { Layout } from "antd";
-import AppHeader from "./Header";
 import image1 from "../../assets/img/rush.jpeg";
-const { Header, Content, Footer } = Layout;
+const { Content } = Layout;
 
 export default function MainPage() {
   return (
     <Layout className="layout">
-      <Header>
-        <AppHeader />
-      </Header>
       <Content>
         <div className="site-layout-content">
           <img alt="Dragon" src={image1} />
@@ -23,7 +19,6 @@ export default function MainPage() {
           </Button>
         </div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>数据库课程设计</Footer>
     </Layout>
   );
 }

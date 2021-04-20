@@ -1,12 +1,10 @@
 import React from "react";
 import "antd/dist/antd.css";
-import AppHeader from "../common/Header";
 import { Layout, Menu } from "antd";
 
 import OrderCenter from "./OrderCenter";
-import AppFooter from "../common/Footer";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default function BuyingPage() {
@@ -20,9 +18,6 @@ export default function BuyingPage() {
           left: 0,
         }}
       >
-        <Header>
-          <AppHeader />
-        </Header>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
           <Menu.Item key="1">市场</Menu.Item>
           <Menu.Item key="2">订单中心</Menu.Item>
@@ -30,7 +25,6 @@ export default function BuyingPage() {
         </Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
         <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
           <div
             className="site-layout-background"
@@ -39,7 +33,6 @@ export default function BuyingPage() {
             <OrderCenter />
           </div>
         </Content>
-        <AppFooter />
       </Layout>
     </Layout>
   );

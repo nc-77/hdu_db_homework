@@ -10,10 +10,8 @@ import {
   UploadOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import AppHeader from "../common/Header";
-import AppFooter from "../common/Footer";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export default function AdministratorPage() {
   return (
@@ -26,9 +24,6 @@ export default function AdministratorPage() {
           left: 0,
         }}
       >
-        <Header>
-          <AppHeader />
-        </Header>
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
           <Menu.Item key="1" icon={<UserOutlined />}>
             用户管理
@@ -45,7 +40,6 @@ export default function AdministratorPage() {
         </Menu>
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
         <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
           <div
             className="site-layout-background"
@@ -54,7 +48,6 @@ export default function AdministratorPage() {
             content
           </div>
         </Content>
-        <AppFooter />
       </Layout>
     </Layout>
   );
