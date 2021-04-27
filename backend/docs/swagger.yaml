@@ -1,0 +1,56 @@
+basePath: /api
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: me@razeen.me
+    name: www.topgoer.com
+    url: https://www.topgoer.com
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.topgoer.com
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /buyer:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 买家注册
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户注册成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户创建失败","data":""}'
+          schema:
+            type: string
+      summary: 买家注册
+      tags:
+      - buyer
+swagger: "2.0"
