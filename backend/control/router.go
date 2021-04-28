@@ -23,8 +23,9 @@ func InitRouter() *gin.Engine {
 
 		//buyerGroup.GET("/all", service.GetAllBuyers)
 
-		//buyerGroup.GET("", service.GetSingleBuyer)
+		//buyerGroup.GET("", buyerGetHandle)
 		//buyerGroup.PUT("", service.UpdateBuyer)
+		buyerGroup.POST("/login", loginHandle("buyers"))
 		buyerGroup.POST("", buyerRegisterHandle)
 		//buyerGroup.DELETE("", service.DeleteBuyer)
 	}

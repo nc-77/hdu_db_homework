@@ -13,7 +13,17 @@ func checkPassword(password string) (b bool) {
 	return ok
 }
 
-func checkUserNum(userNum string) (b bool) {
-	ok, _ := regexp.MatchString("^[0-9]{4,10}$", userNum)
+func checkUsername(username string) (b bool) {
+	ok, _ := regexp.MatchString("^[0-9]{4,10}$", username)
 	return ok
+}
+
+func CheckAccount(username, password string) (err error) {
+	if ok := checkUsername(username); !ok {
+		return usernameError
+	}
+	if ok := checkPassword(password); !ok {
+		return passwordError
+	}
+	return nil
 }

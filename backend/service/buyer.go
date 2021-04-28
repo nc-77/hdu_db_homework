@@ -23,11 +23,8 @@ type Buyer struct {
 func (buyer *Buyer) Register() error {
 
 	// 账号密码参数检验
-	if ok := checkUserNum(buyer.Username); !ok {
-		return usernameError
-	}
-	if ok := checkPassword(buyer.Password); !ok {
-		return passwordError
+	if err := CheckAccount(buyer.Username, buyer.Password); err != nil {
+		return err
 	}
 	// 检查该学号是否被注册
 	if tx := driver.DB.Where("username = ?", buyer.Username).Find(buyer); tx.RowsAffected != 0 {

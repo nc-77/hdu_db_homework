@@ -53,4 +53,32 @@ paths:
       summary: 买家注册
       tags:
       - buyer
+  /buyer/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 买家登录
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "登录成功","data":""token":"xxxxxxxxx""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "登录失败","data":""}'
+          schema:
+            type: string
+      summary: 买家登录
+      tags:
+      - buyer
 swagger: "2.0"

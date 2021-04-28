@@ -10,7 +10,7 @@ func failResponse(c *gin.Context, msg error) {
 	})
 }
 
-func sucResponse(c *gin.Context, msg string, data interface{}) {
+func sucResponse(c *gin.Context, msg string, data map[string]interface{}) {
 	c.JSON(200, gin.H{
 		"code": 200,
 		"msg":  msg,

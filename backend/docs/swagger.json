@@ -77,6 +77,48 @@
                     }
                 }
             }
+        },
+        "/buyer/login": {
+            "post": {
+                "description": "买家登录",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "buyer"
+                ],
+                "summary": "买家登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "学号",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"登录成功\",\"data\":\"\"token\":\"xxxxxxxxx\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"登录失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     }
 }
