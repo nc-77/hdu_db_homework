@@ -56,3 +56,10 @@ func (buyer *Buyer) Get() error {
 	}
 	return nil
 }
+
+func (buyer *Buyer) Update() error {
+	if tx := driver.DB.Model(&Buyer{}).Where("username = ?", buyer.Username).Updates(buyer); tx.Error != nil {
+		return tx.Error
+	}
+	return nil
+}

@@ -25,7 +25,7 @@
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "根据买家的学号获取买家信息",
+                "description": "根据token获取买家个人信息",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -42,6 +42,55 @@
                     },
                     "400": {
                         "description": "{\"code\":\"400\",\"msg\": \"用户查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据token更新买家个人信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "buyer"
+                ],
+                "summary": "更新买家个人信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "姓名",
+                        "name": "name",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "联系方式",
+                        "name": "phone",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "昵称",
+                        "name": "nickname",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户更新成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户更新失败\",\"data\":\"\"}",
                         "schema": {
                             "type": "string"
                         }

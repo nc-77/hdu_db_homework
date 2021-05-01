@@ -17,7 +17,7 @@ paths:
     get:
       consumes:
       - multipart/form-data
-      description: 根据买家的学号获取买家信息
+      description: 根据token获取买家个人信息
       responses:
         "200":
           description: '{"code":"200","msg": "用户查询成功","data":""}'
@@ -30,6 +30,37 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 查询买家
+      tags:
+      - buyer
+    post:
+      consumes:
+      - multipart/form-data
+      description: 根据token更新买家个人信息
+      parameters:
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户更新成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户更新失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新买家个人信息
       tags:
       - buyer
   /buyer/login:
