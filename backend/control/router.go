@@ -22,14 +22,12 @@ func InitRouter() *gin.Engine {
 	buyerGroup := r.Group("/api/buyer")
 	{
 
-		//buyerGroup.GET("/all", service.GetAllBuyers)
-
 		buyerGroup.GET("", middleWare.JwtAuth(), buyerGetHandle)
 		//buyerGroup.PUT("", service.UpdateBuyer)
 		buyerGroup.POST("/login", loginHandle("buyers"))
 		buyerGroup.POST("/register", buyerRegisterHandle)
 		buyerGroup.POST("", middleWare.JwtAuth(), buyerUpdateHandle)
-		//buyerGroup.DELETE("", service.DeleteBuyer)
+
 	}
 
 	return r
