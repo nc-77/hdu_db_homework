@@ -32,5 +32,6 @@ func CreateDbConnection() error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
+
 	return nil
 }

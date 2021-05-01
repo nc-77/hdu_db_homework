@@ -16,6 +16,7 @@ func InitRouter() *gin.Engine {
 	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
 	r := gin.Default()
+
 	r.Use(middleWare.CorsAuth())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	buyerGroup := r.Group("/api/buyer")
@@ -23,10 +24,10 @@ func InitRouter() *gin.Engine {
 
 		//buyerGroup.GET("/all", service.GetAllBuyers)
 
-		//buyerGroup.GET("", buyerGetHandle)
+		buyerGroup.GET("", middleWare.JwtAuth(), buyerGetHandle)
 		//buyerGroup.PUT("", service.UpdateBuyer)
 		buyerGroup.POST("/login", loginHandle("buyers"))
-		buyerGroup.POST("", buyerRegisterHandle)
+		buyerGroup.POST("/register", buyerRegisterHandle)
 		//buyerGroup.DELETE("", service.DeleteBuyer)
 	}
 

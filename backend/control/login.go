@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"hdu_db_homework/driver"
 	"hdu_db_homework/service"
+	"hdu_db_homework/utils"
 )
 
 type Result struct {
@@ -28,30 +29,33 @@ func loginHandle(tableName string) gin.HandlerFunc {
 		username := c.PostForm("username")
 		password := c.PostForm("password")
 		/* 检查账号密码合法性 */
-		if err := service.CheckAccount(username, password); err != nil {
-			failResponse(c, err)
+		if err := utils.CheckAccount(username, password); err != nil {
+			utils.FailResponse(c, err)
 			return
 		}
 
 		/* 检查是否已经注册 */
 		if tx := driver.DB.Raw(fmt.Sprintf("SELECT username,password FROM %v where username = ?", tableName), username).Scan(&result); tx.RowsAffected == 0 {
-			failResponse(c, service.NotExistError)
+			utils.FailResponse(c, utils.NotExistError)
 			return
 		}
 
 		/* 验证密码 */
 		if err := bcrypt.CompareHashAndPassword([]byte(result.Password), []byte(password)); err != nil {
-			failResponse(c, service.LoginError)
+			utils.FailResponse(c, utils.LoginError)
 			return
 		}
 
-		/* 生成token */
-		token, err := service.CreateToken(username)
+		/* 根据username,user属性生成token */
+		token, err := service.CreateToken(username, tableName[:len(tableName)-1])
 		if err != nil {
-			failResponse(c, service.CreateTokenError)
+			utils.FailResponse(c, utils.CreateTokenError)
 			return
 		}
-		data := map[string]interface{}{"token": token}
-		sucResponse(c, "登录成功", data)
+		data := &struct {
+			Token string `json:"token"`
+		}{Token: token}
+
+		utils.SucResponse(c, "登录成功", data)
 	}
 }

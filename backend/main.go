@@ -12,6 +12,10 @@ import (
 // @description This is a sample server celler server.
 // @termsOfService https://www.topgoer.com
 
+//@securityDefinitions.apikey ApiKeyAuth
+//@in header
+//@name Authorization
+
 // @contact.name www.topgoer.com
 // @contact.url https://www.topgoer.com
 // @contact.email me@razeen.me
@@ -27,6 +31,7 @@ func main() {
 		log.Printf("%+v", err)
 		return
 	}
+
 	router := control.InitRouter()
 	router.Run(":8080")
 }
