@@ -26,7 +26,7 @@ func InitRouter() *gin.Engine {
 		//buyerGroup.PUT("", service.UpdateBuyer)
 		buyerGroup.POST("/login", loginHandle("buyers"))
 		buyerGroup.POST("/register", buyerRegisterHandle)
-		buyerGroup.POST("", middleWare.JwtAuth(), buyerUpdateHandle)
+		buyerGroup.PUT("", middleWare.JwtAuth(), buyerUpdateHandle)
 
 	}
 

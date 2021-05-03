@@ -47,7 +47,7 @@ var doc = `{
                 "tags": [
                     "buyer"
                 ],
-                "summary": "查询买家",
+                "summary": "查询买家个人信息",
                 "responses": {
                     "200": {
                         "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",

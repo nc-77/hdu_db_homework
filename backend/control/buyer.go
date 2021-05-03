@@ -75,7 +75,7 @@ func buyerGetHandle(c *gin.Context) {
 // @Param nickname formData string false "昵称"
 // @Success 200 {string} json "{"code":"200","msg": "用户更新成功","data":""}"
 // @Failure 400 {string} json "{"code":"400","msg": "用户更新失败","data":""}"
-// @Router /buyer [post]
+// @Router /buyer [put]
 func buyerUpdateHandle(c *gin.Context) {
 	var buyer service.Buyer
 	username, _ := c.Get("username")
