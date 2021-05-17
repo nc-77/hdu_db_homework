@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
@@ -6,6 +6,20 @@ import { Layout } from "antd";
 const { Content } = Layout;
 
 export default function Login() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(1);
+  };
+
+  const [resgisterInformation, setRegisterInformation] = useState({});
+
+  useEffect(() => {
+    setRegisterInformation({
+      username: "19205133",
+      password: "1234567",
+    });
+  }, []);
+
   return (
     <Layout>
       <Content>
@@ -13,6 +27,7 @@ export default function Login() {
           name="normal_login"
           className="login-form"
           initialValues={{ remember: true }}
+          onSubmit={handleSubmit}
           /* onFinish={onFinish} */
         >
           <Form.Item
@@ -55,7 +70,7 @@ export default function Login() {
             >
               Log in
             </Button>
-            Or <a href="#">register now!</a>
+            Or <button href="#">register now!</button>
           </Form.Item>
         </Form>
       </Content>

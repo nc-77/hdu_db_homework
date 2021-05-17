@@ -1,4 +1,6 @@
 import { Form, Input, Checkbox, Button, Layout } from "antd";
+import { useEffect } from "react";
+import axios from "axios";
 
 const { Content } = Layout;
 
@@ -29,6 +31,28 @@ const tailFormItemLayout = {
 export default function Register() {
   const [form] = Form.useForm();
 
+  const handleSubmit = (value) => {
+    console.log(1);
+    console.log(form.validateFields);
+  };
+
+  const data = {
+    username: "1234",
+    password: "1234567",
+    name: "zhaoqi",
+    phone: "13661815232",
+    nickname: "zhaoqi",
+  };
+
+  useEffect(() => {
+    /* axios.post("http://localhost:8080/api/buyer/register", data).then((res) => {
+      console.log(res);
+    }); */
+    axios.get("http://localhost:8080/api/buyer").then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   return (
     <Layout>
       <Content>
@@ -42,6 +66,7 @@ export default function Register() {
             prefix: "86",
           }}
           scrollToFirstError
+          onSubmit={handleSubmit}
         >
           <Form.Item
             name="studentCode"
@@ -133,7 +158,7 @@ export default function Register() {
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     </Form.Item> */}
 
-          <Form.Item
+          {/* <Form.Item
             name="identityCheck"
             valuePropName="checked"
             rules={[
@@ -149,9 +174,9 @@ export default function Register() {
             <Checkbox>我是买家</Checkbox>
             <Checkbox>我是卖家</Checkbox>
             <Checkbox>我是管理员</Checkbox>
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+          </Form.Item> */}
+          <Form.Item {...tailFormItemLayout} onSubmit={handleSubmit}>
+            <Button type="primary" htmlType="submit" onClick={handleSubmit}>
               Register
             </Button>
           </Form.Item>
