@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Hero from "../pages/Hero";
+import Register from "../pages/RegisterPage";
 
 const ROUTES = [
   {
@@ -19,7 +20,7 @@ const ROUTES = [
     path: "/register",
     key: "REGISTER",
     exact: true,
-    component: () => <h1>Register</h1>,
+    component: () => <Register />,
   },
   {
     path: "/app",
