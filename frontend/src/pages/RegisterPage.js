@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import GetFormData from "../utils/GetFormData";
-
-import useRegisterForm from "../components/useRegisterFrom";
+import useForm from "../components/useFrom";
+import React from "react";
 import axios from "axios";
 
 const data = {
@@ -10,20 +9,19 @@ const data = {
   name: "",
   phone: "",
   nickname: "",
+  identity: "",
 };
 
 export default function Register() {
   const submitCallback = () => {
+    console.log(Info);
     axios.post(
-      "http://localhost:8080/api/buyer/register",
-      GetFormData(RegisterInfo)
+      `http://localhost:8080/api/${Info.identity}/register`,
+      GetFormData(Info)
     );
   };
 
-  const [RegisterInfo, handleChange, handleSubmit] = useRegisterForm(
-    data,
-    submitCallback
-  );
+  const [Info, handleChange, handleSubmit] = useForm(data, submitCallback);
 
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
@@ -36,7 +34,7 @@ export default function Register() {
             autoComplete="on"
             id="username"
             placeholder="Enter username"
-            value={RegisterInfo.username}
+            value={Info.username}
             onChange={handleChange}
           />
         </div>
@@ -48,7 +46,7 @@ export default function Register() {
             autoComplete="on"
             id="password"
             placeholder="Password"
-            value={RegisterInfo.password}
+            value={Info.password}
             onChange={handleChange}
           />
         </div>
@@ -70,7 +68,7 @@ export default function Register() {
             autoComplete="on"
             id="name"
             placeholder="name"
-            value={RegisterInfo.name}
+            value={Info.name}
             onChange={handleChange}
           />
         </div>
@@ -82,7 +80,7 @@ export default function Register() {
             autoComplete="on"
             id="phone"
             placeholder="contact"
-            value={RegisterInfo.phone}
+            value={Info.phone}
             onChange={handleChange}
           />
         </div>
@@ -94,9 +92,16 @@ export default function Register() {
             autoComplete="on"
             id="nickname"
             placeholder="nickname"
-            value={RegisterInfo.nickname}
+            value={Info.nickname}
             onChange={handleChange}
           />
+        </div>
+        <div className="form-group text-left">
+          <label>选择身份</label>
+          <select id="identity" onChange={handleChange} value={Info.identity}>
+            <option value="buyer">买家</option>
+            <option value="seller">卖家</option>
+          </select>
         </div>
         <input type="submit" className="btn btn-primary" value="提交" />
       </form>

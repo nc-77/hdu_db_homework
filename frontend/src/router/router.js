@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Hero from "../pages/Hero";
+import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 
 const ROUTES = [
@@ -14,7 +15,7 @@ const ROUTES = [
     path: "/login",
     key: "LOGIN",
     exact: true,
-    component: () => <h1>Log in</h1>,
+    component: () => <Login />,
   },
   {
     path: "/register",
