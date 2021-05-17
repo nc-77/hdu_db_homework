@@ -10,7 +10,7 @@ const ROUTES = [
     path: "/",
     key: "ROOT",
     exact: true,
-    component: Hero,
+    component: () => <Hero />,
   },
   {
     path: "/login",
