@@ -1,19 +1,22 @@
-import GetFormData from "../utils/GetFormData";
 import useForm from "../components/useFrom";
 import React from "react";
 import axios from "axios";
+import getFormData from "../utils/GetFormData";
 
 const data = {
   username: "",
   password: "",
-  name: "",
-  phone: "",
-  nickname: "",
 };
 
-export default function Register() {
+export default function Login() {
   const submitCallback = () => {
-    axios.post("http://localhost:8080/api/buyer/register", GetFormData(Info));
+    axios
+      .post("http://localhost:8080/api/buyer/login", getFormData(Info))
+      .then((res) => {
+        const responseData = JSON.parse(res.request.response);
+        const token = responseData.data.token;
+        localStorage.setItem("user_token", token);
+      });
   };
 
   const [Info, handleChange, handleSubmit] = useForm(data, submitCallback);
@@ -46,52 +49,30 @@ export default function Register() {
           />
         </div>
         <div className="form-group text-left">
-          <label>密码确认</label>
           <input
-            type="password"
+            type="checkbox"
             className="form-control"
             autoComplete="on"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-          />
-        </div>
-        <div className="form-group text-left">
-          <label>姓名</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete="on"
-            id="name"
-            placeholder="name"
-            value={Info.name}
+            id="password"
+            placeholder="Password"
+            value={Info.password}
             onChange={handleChange}
           />
-        </div>
-        <div className="form-group text-left">
-          <label>联系方式</label>
+          <label>我是买家</label>
+          <br />
           <input
-            type="text"
+            type="checkbox"
             className="form-control"
             autoComplete="on"
-            id="phone"
-            placeholder="contact"
-            value={Info.phone}
+            id="password"
+            placeholder="Password"
+            value={Info.password}
             onChange={handleChange}
           />
+          <label>我是卖家</label>
+          <br />
         </div>
-        <div className="form-group text-left">
-          <label>昵称</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete="on"
-            id="nickname"
-            placeholder="nickname"
-            value={Info.nickname}
-            onChange={handleChange}
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="提交" />
+        <input type="submit" className="btn btn-primary" value="登录" />
       </form>
     </div>
   );

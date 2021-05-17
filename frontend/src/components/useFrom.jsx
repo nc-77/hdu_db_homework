@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const useRegisterForm = (defaultState, submitCallback) => {
-  const [RegisterInfo, setRegisterInfo] = useState(defaultState);
+const useForm = (defaultState, submitCallback) => {
+  const [Info, setInfo] = useState(defaultState);
 
   const handleChange = (e) => {
-    setRegisterInfo({
-      ...RegisterInfo,
+    setInfo({
+      ...Info,
       [e.target.id]: e.target.value,
     });
   };
@@ -95,7 +95,7 @@ const useRegisterForm = (defaultState, submitCallback) => {
     );
   }; */
 
-  return [RegisterInfo, handleChange, handleSubmit, setRegisterInfo];
+  return [Info, handleChange, handleSubmit, setInfo];
 };
 
-export default useRegisterForm;
+export default useForm;
