@@ -6,16 +6,20 @@ import getFormData from "../utils/GetFormData";
 const data = {
   username: "",
   password: "",
+  identity: "",
 };
 
 export default function Login() {
   const submitCallback = () => {
     axios
-      .post("http://localhost:8080/api/buyer/login", getFormData(Info))
+      .post(
+        `http://localhost:8080/api/${Info.identity}/login`,
+        getFormData(Info)
+      )
       .then((res) => {
         const responseData = JSON.parse(res.request.response);
         const token = responseData.data.token;
-        localStorage.setItem("user_token", token);
+        localStorage.setItem(`user_token_${Info.identity}`, token);
       });
   };
 
@@ -49,28 +53,11 @@ export default function Login() {
           />
         </div>
         <div className="form-group text-left">
-          <input
-            type="checkbox"
-            className="form-control"
-            autoComplete="on"
-            id="password"
-            placeholder="Password"
-            value={Info.password}
-            onChange={handleChange}
-          />
-          <label>我是买家</label>
-          <br />
-          <input
-            type="checkbox"
-            className="form-control"
-            autoComplete="on"
-            id="password"
-            placeholder="Password"
-            value={Info.password}
-            onChange={handleChange}
-          />
-          <label>我是卖家</label>
-          <br />
+          <label>选择身份</label>
+          <select id="identity" onChange={handleChange} value={Info.identity}>
+            <option value="buyer">买家</option>
+            <option value="seller">卖家</option>
+          </select>
         </div>
         <input type="submit" className="btn btn-primary" value="登录" />
       </form>

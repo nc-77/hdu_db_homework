@@ -9,11 +9,16 @@ const data = {
   name: "",
   phone: "",
   nickname: "",
+  identity: "",
 };
 
 export default function Register() {
   const submitCallback = () => {
-    axios.post("http://localhost:8080/api/buyer/register", GetFormData(Info));
+    console.log(Info);
+    axios.post(
+      `http://localhost:8080/api/${Info.identity}/register`,
+      GetFormData(Info)
+    );
   };
 
   const [Info, handleChange, handleSubmit] = useForm(data, submitCallback);
@@ -90,6 +95,13 @@ export default function Register() {
             value={Info.nickname}
             onChange={handleChange}
           />
+        </div>
+        <div className="form-group text-left">
+          <label>选择身份</label>
+          <select id="identity" onChange={handleChange} value={Info.identity}>
+            <option value="buyer">买家</option>
+            <option value="seller">卖家</option>
+          </select>
         </div>
         <input type="submit" className="btn btn-primary" value="提交" />
       </form>
