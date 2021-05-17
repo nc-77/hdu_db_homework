@@ -1,16 +1,20 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import MainPage from "../src/components/common/MainPage";
-import Login from "../src/components/common/Login";
-import Register from "../src/components/common/Register";
-import BuyingPage from "../src/components/BuyerPage/BuyingPage";
-import SellerPage from "./components/SellerPage/SellerPage";
-import AdministratorPage from "./components/AdministratorPage/AdministratorPage";
-import { Header } from "antd/lib/layout/layout";
-import AppHeader from "./components/common/Header";
-import AppFooter from "./components/common/Footer";
+import ROUTES, { RenderRoutes } from "./router/router";
 
 function App() {
+  return (
+    <div style={{ display: "flex", height: "100vh", alignItems: "stretch" }}>
+      <div style={{ flex: 0.3, backgroundColor: "#f2f2f2" }}></div>
+      <div>
+        <RenderRoutes routes={ROUTES} />
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+/* function App() {
   return (
     <>
       <Router>
@@ -19,7 +23,7 @@ function App() {
             <AppHeader />
           </Header>
         </Link>
-        <Switch>
+        <Switch> 
           <Route path="/main">
             <MainPage />
           </Route>
@@ -45,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; */
