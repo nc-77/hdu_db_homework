@@ -200,6 +200,37 @@
                 }
             }
         },
+        "/good/all": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询所有商品信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "good"
+                ],
+                "summary": "查询所有商品信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"所有商品查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"所有商品查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/seller": {
             "get": {
                 "security": [
