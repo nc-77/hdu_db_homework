@@ -40,5 +40,10 @@ func InitRouter() *gin.Engine {
 		sellerGroup.PUT("", middleWare.JwtAuth(), sellerUpdateHandle)
 
 	}
+
+	goodGroup := r.Group("/api/good")
+	{
+		goodGroup.GET("/all", goodGetAllHandle)
+	}
 	return r
 }
