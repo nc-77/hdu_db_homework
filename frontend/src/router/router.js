@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
@@ -24,19 +25,38 @@ const ROUTES = [
     component: () => <Register />,
   },
   {
-    path: "/app",
-    key: "APP",
+    path: "/buyer",
+    key: "BUYER",
     component: RenderRoutes,
     routes: [
       {
-        path: "/app",
-        key: "APP_ROOT",
+        path: "/buyer",
+        key: "BUYER_ROOT",
+        exact: true,
+        component: () => <BuyerPage />,
+      },
+      {
+        path: "/buyer/personalCenter",
+        key: "BUYER_PAGE",
+        exact: true,
+        component: () => <h1>App Page</h1>,
+      },
+    ],
+  },
+  {
+    path: "/seller",
+    key: "SELLER",
+    component: RenderRoutes,
+    routes: [
+      {
+        path: "/seller",
+        key: "SELLER_ROOT",
         exact: true,
         component: () => <h1>App Index</h1>,
       },
       {
-        path: "/app/page",
-        key: "APP_PAGE",
+        path: "/seller/personalCenter",
+        key: "SELLER_PAGE",
         exact: true,
         component: () => <h1>App Page</h1>,
       },

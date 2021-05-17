@@ -2,14 +2,17 @@ import useForm from "../components/useFrom";
 import React from "react";
 import axios from "axios";
 import getFormData from "../utils/GetFormData";
+import { useHistory } from "react-router";
 
 const data = {
   username: "",
   password: "",
-  identity: "",
+  identity: "buyer",
 };
 
 export default function Login() {
+  let RouterHistory = useHistory();
+
   const submitCallback = () => {
     axios
       .post(
@@ -19,7 +22,11 @@ export default function Login() {
       .then((res) => {
         const responseData = JSON.parse(res.request.response);
         const token = responseData.data.token;
+        const status = responseData.code;
         localStorage.setItem(`user_token_${Info.identity}`, token);
+        if (status) {
+          RouterHistory.push(`/${Info.identity}`);
+        }
       });
   };
 
