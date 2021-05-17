@@ -32,7 +32,7 @@ paths:
       summary: 查询买家个人信息
       tags:
       - buyer
-    post:
+    put:
       consumes:
       - multipart/form-data
       description: 根据token更新买家个人信息
@@ -131,6 +131,124 @@ paths:
       summary: 买家注册
       tags:
       - buyer
+  /seller:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据token获取卖家个人信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询卖家个人信息
+      tags:
+      - seller
+    put:
+      consumes:
+      - multipart/form-data
+      description: 根据token更新卖家个人信息
+      parameters:
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户更新成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户更新失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新卖家个人信息
+      tags:
+      - seller
+  /seller/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 卖家登录
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "登录成功","data":""token":"xxxxxxxxx""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "登录失败","data":""}'
+          schema:
+            type: string
+      summary: 卖家登录
+      tags:
+      - seller
+  /seller/register:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 卖家注册
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户注册成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户创建失败","data":""}'
+          schema:
+            type: string
+      summary: 卖家注册
+      tags:
+      - seller
 securityDefinitions:
   ApiKeyAuth:
     in: header

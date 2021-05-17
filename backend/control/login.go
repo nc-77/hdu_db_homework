@@ -59,3 +59,16 @@ func loginHandle(tableName string) gin.HandlerFunc {
 		utils.SucResponse(c, "登录成功", data)
 	}
 }
+
+// @Summary 卖家登录
+// @Description 卖家登录
+// @Tags seller
+// @Accept mpfd
+// @Param username formData string true "学号"
+// @Param password formData string true "密码"
+// @Success 200 {string} json "{"code":"200","msg": "登录成功","data":""token":"xxxxxxxxx""}"
+// @Failure 400 {string} json "{"code":"400","msg": "登录失败","data":""}"
+// @Router /seller/login [post]
+func ping(ctx *gin.Context) {
+	ctx.JSON(200, "ping")
+}

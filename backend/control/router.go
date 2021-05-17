@@ -30,5 +30,15 @@ func InitRouter() *gin.Engine {
 
 	}
 
+	sellerGroup := r.Group("/api/seller")
+	{
+		sellerGroup.GET("/ping", ping)
+		sellerGroup.GET("", middleWare.JwtAuth(), sellerGetHandle)
+
+		sellerGroup.POST("/login", loginHandle("sellers"))
+		sellerGroup.POST("/register", sellerRegisterHandle)
+		sellerGroup.PUT("", middleWare.JwtAuth(), sellerUpdateHandle)
+
+	}
 	return r
 }

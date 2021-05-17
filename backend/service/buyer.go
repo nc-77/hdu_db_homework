@@ -9,13 +9,13 @@ import (
 )
 
 type Buyer struct {
-	ID       uint   ` json:"id" gorm:"primarykey"`
-	Name     string ` json:"name" form:"name"`
-	Phone    string `json:"phone" form:"phone"`
-	Username string ` json:"username" form:"username"`
-	Password string `json:"-" form:"password"`
-	Nickname string `json:"nickname" form:"nickname"`
-
+	ID        uint           ` json:"id" gorm:"primarykey"`
+	Name      string         ` json:"name" form:"name"`
+	Phone     string         `json:"phone" form:"phone"`
+	Username  string         ` json:"username" form:"username"`
+	Password  string         `json:"-" form:"password"`
+	Nickname  string         `json:"nickname" form:"nickname"`
+	Credit    int            `json:"credit" gorm:"default:100"`
 	CreatedAt time.Time      `json:"created_at" `
 	UpdatedAt time.Time      `json:"updated_at" `
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
@@ -28,10 +28,10 @@ func (buyer *Buyer) Register() error {
 		return err
 	}
 	// 检查该学号是否被注册
-	if tx := driver.DB.Where("Username = ?", buyer.Username).Find(buyer); tx.RowsAffected != 0 {
+
+	if tx := driver.DB.Where("username = ?", buyer.Username).Find(buyer); tx.RowsAffected != 0 {
 		return utils.ExistError
 	}
-
 	// 加密密码
 	hash, err := bcrypt.GenerateFromPassword([]byte(buyer.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -39,6 +39,7 @@ func (buyer *Buyer) Register() error {
 	}
 	buyer.Password = string(hash)
 	// 持久化至数据库
+
 	if result := driver.DB.Create(buyer); result.Error != nil {
 		return utils.RegisterError
 	}

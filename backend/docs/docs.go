@@ -63,7 +63,7 @@ var doc = `{
                     }
                 }
             },
-            "post": {
+            "put": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -165,6 +165,188 @@ var doc = `{
                     "buyer"
                 ],
                 "summary": "买家注册",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "学号",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "姓名",
+                        "name": "name",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "联系方式",
+                        "name": "phone",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "昵称",
+                        "name": "nickname",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户注册成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户创建失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/seller": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据token获取卖家个人信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "seller"
+                ],
+                "summary": "查询卖家个人信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据token更新卖家个人信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "seller"
+                ],
+                "summary": "更新卖家个人信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "姓名",
+                        "name": "name",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "联系方式",
+                        "name": "phone",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "昵称",
+                        "name": "nickname",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户更新成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户更新失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/seller/login": {
+            "post": {
+                "description": "卖家登录",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "seller"
+                ],
+                "summary": "卖家登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "学号",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"登录成功\",\"data\":\"\"token\":\"xxxxxxxxx\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"登录失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/seller/register": {
+            "post": {
+                "description": "卖家注册",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "seller"
+                ],
+                "summary": "卖家注册",
                 "parameters": [
                     {
                         "type": "string",
