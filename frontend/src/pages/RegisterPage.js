@@ -11,7 +11,7 @@ const data = {
   name: "",
   phone: "",
   nickname: "",
-  identity: "",
+  identity: "buyer",
 };
 
 export default function Register() {
@@ -160,7 +160,6 @@ export default function Register() {
               type="password"
               id="password2"
               placeholder="确认密码"
-              value="" //这里缺验证部分
               onChange={handleChange}
             />
           </div>

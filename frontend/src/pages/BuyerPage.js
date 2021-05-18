@@ -1,13 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useForm from "../components/useFrom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import { Route, useHistory } from "react-router";
+import Button from "../components/Button";
 
-export default function BuyerPage() {
+export default function BuyerPage(props) {
+  let RouterHistory = useHistory();
+
+  const [NavItem] = useState([
+    {
+      NavBarName: "Home",
+      SwitchLink: () => {
+        RouterHistory.push("/buyer");
+      },
+    },
+    {
+      NavBarName: "个人中心",
+      SwitchLink: () => {
+        RouterHistory.push("/buyer/personalCenter");
+      },
+    },
+    {
+      NavBarName: "测试",
+      SwitchLink: () => {
+        RouterHistory.push("/buyer");
+      },
+    },
+  ]);
   const submitCallback = () => {
     axios.get(`http://localhost:8080/api/buyer`);
   };
-
   const [Info, handleChange, handleSubmit, setInfo] = useForm(
     "",
     submitCallback
@@ -28,7 +51,8 @@ export default function BuyerPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar defaultState={NavItem} />
+      {props.children}
     </>
   );
 }

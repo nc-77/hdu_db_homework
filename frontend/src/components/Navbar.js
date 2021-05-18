@@ -3,29 +3,28 @@ import { Link } from "react-router-dom";
 import { Button } from "./Button";
 import "./Navbar.css";
 
-function Navbar() {
-  const [click, setClick] = useState(false);
-  /* 变化 */
-  const handleClick = () => setClick(!click);
+function Navbar({ defaultState }) {
+  const [NavItem] = useState(defaultState);
 
   return (
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          <Link to="/" className="navbar-logo">
-            TRAD
-          </Link>
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li
-              className="nav-item nav-links"
-              onClick={() => {
-                console.log(1);
-              }}
-            >
-              Home
-            </li>
-            <li className="nav-item nav-links">Services</li>
-            <li className="nav-item nav-links">Products</li>
+          <a href="/" className="navbar-logo">
+            二手交易平台
+          </a>
+          <ul className="nav-menu active">
+            {NavItem.map((Nav) => {
+              return (
+                <li
+                  key={Nav.NavBarName}
+                  className="nav-item nav-links"
+                  onClick={Nav.SwitchLink}
+                >
+                  {Nav.NavBarName}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
