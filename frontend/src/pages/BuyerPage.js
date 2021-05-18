@@ -1,40 +1,33 @@
 import React, { useEffect, useState } from "react";
-import useForm from "../components/useFrom";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-import { Route, useHistory } from "react-router";
-import Button from "../components/Button";
+import { useHistory } from "react-router";
 
 export default function BuyerPage(props) {
   let RouterHistory = useHistory();
 
+  const [Info, setInfo] = useState("");
+
   const [NavItem] = useState([
     {
-      NavBarName: "Home",
-      SwitchLink: () => {
+      NavBarName: "市场",
+      ToggleLink: () => {
         RouterHistory.push("/buyer");
       },
     },
     {
       NavBarName: "个人中心",
-      SwitchLink: () => {
+      ToggleLink: () => {
         RouterHistory.push("/buyer/personalCenter");
       },
     },
     {
-      NavBarName: "测试",
-      SwitchLink: () => {
-        RouterHistory.push("/buyer");
+      NavBarName: "联系",
+      ToggleLink: () => {
+        RouterHistory.push("/buyer/contact");
       },
     },
   ]);
-  const submitCallback = () => {
-    axios.get(`http://localhost:8080/api/buyer`);
-  };
-  const [Info, handleChange, handleSubmit, setInfo] = useForm(
-    "",
-    submitCallback
-  );
 
   useEffect(() => {
     const user_buyer_token = localStorage.getItem("user_token_buyer");
@@ -52,7 +45,10 @@ export default function BuyerPage(props) {
   return (
     <>
       <Navbar defaultState={NavItem} />
-      {props.children}
+      {props.children &&
+        React.cloneElement(props.children, {
+          props: Info,
+        })}
     </>
   );
 }

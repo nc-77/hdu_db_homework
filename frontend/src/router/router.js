@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Button from "../components/Button";
+import PersonalCenterForm from "../components/PersonalCenterForm";
 import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
 import Login from "../pages/LoginPage";
@@ -40,7 +40,11 @@ const ROUTES = [
         path: "/buyer/personalCenter",
         key: "BUYER_PAGE",
         exact: true,
-        component: () => <BuyerPage>432534</BuyerPage>,
+        component: () => (
+          <BuyerPage>
+            <PersonalCenterForm />
+          </BuyerPage>
+        ),
       },
     ],
   },
