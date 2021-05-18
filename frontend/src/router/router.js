@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Market from "../components/Market";
 import PersonalCenter from "../components/PersonalCenter";
 import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
@@ -62,7 +63,7 @@ const ROUTES = [
         exact: true,
         component: () => (
           <BuyerPage>
-            <h1>1</h1>
+            <Market />
           </BuyerPage>
         ),
       },

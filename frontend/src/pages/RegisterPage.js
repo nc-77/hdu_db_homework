@@ -1,5 +1,5 @@
 import GetFormData from "../utils/GetFormData";
-import useForm from "../components/useFrom";
+import useForm from "../components/useForm";
 import "./RegisterPage.css";
 import React from "react";
 import axios from "axios";
@@ -125,7 +125,7 @@ export default function Register() {
               type="text"
               id="username"
               placeholder="8位学号"
-              value={Info.username}
+              value={Info.username || ""}
               onChange={handleChange}
             />
           </div>
@@ -137,7 +137,7 @@ export default function Register() {
               autoComplete="on"
               id="name"
               placeholder="输入中文姓名"
-              value={Info.name}
+              value={Info.name || ""}
               onChange={handleChange}
             />
           </div>
@@ -148,7 +148,7 @@ export default function Register() {
               type="password"
               id="password"
               placeholder="输入密码"
-              value={Info.password}
+              value={Info.password || ""}
               onChange={handleChange}
             />
           </div>
@@ -170,7 +170,7 @@ export default function Register() {
               autoComplete="on"
               id="phone"
               placeholder="手机号"
-              value={Info.phone}
+              value={Info.phone || ""}
               onChange={handleChange}
             />
           </div>
@@ -182,7 +182,7 @@ export default function Register() {
               autoComplete="on"
               id="nickname"
               placeholder="随便填～"
-              value={Info.nickname}
+              value={Info.nickname || ""}
               onChange={handleChange}
             />
           </div>
@@ -192,7 +192,7 @@ export default function Register() {
               className="form-input"
               id="identity"
               onChange={handleChange}
-              value={Info.identity}
+              value={Info.identity || ""}
             >
               <option value="buyer">买家</option>
               <option value="seller">卖家</option>

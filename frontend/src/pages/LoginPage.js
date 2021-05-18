@@ -1,4 +1,4 @@
-import useForm from "../components/useFrom";
+import useForm from "../components/useForm";
 import React from "react";
 import axios from "axios";
 import getFormData from "../utils/GetFormData";
@@ -48,7 +48,7 @@ export default function Login() {
               type="text"
               id="username"
               placeholder="8位学号"
-              value={Info.username}
+              value={Info.username || "" || ""}
               onChange={handleChange}
             />
           </div>
@@ -59,7 +59,7 @@ export default function Login() {
               type="password"
               id="password"
               placeholder="输入密码"
-              value={Info.password}
+              value={Info.password || ""}
               onChange={handleChange}
             />
           </div>
@@ -69,7 +69,7 @@ export default function Login() {
               className="form-input-loginPage"
               id="identity"
               onChange={handleChange}
-              value={Info.identity}
+              value={Info.identity || ""}
             >
               <option value="buyer">买家</option>
               <option value="seller">卖家</option>
