@@ -8,11 +8,15 @@ function Navbar({ defaultState }) {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          <a href="/" className="navbar-logo">
-            二手交易平台
-          </a>
-          <ul className="nav-menu active">
-            {NavItem.map((Nav) => {
+          {NavItem[0].map((Nav) => {
+            return (
+              <a key={Nav.NavBarName} className="navbar-logo" href="/">
+                {Nav.NavBarName}
+              </a>
+            );
+          })}
+          <ul className="nav-menu">
+            {NavItem[1].map((Nav) => {
               return (
                 <li
                   key={Nav.NavBarName}

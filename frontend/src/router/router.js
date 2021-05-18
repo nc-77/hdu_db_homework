@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import PersonalCenterForm from "../components/PersonalCenterForm";
+import PersonalCenter from "../components/PersonalCenter";
 import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
 import Login from "../pages/LoginPage";
@@ -38,11 +38,31 @@ const ROUTES = [
       },
       {
         path: "/buyer/personalCenter",
-        key: "BUYER_PAGE",
+        key: "BUYER_PERSONALCENTER",
         exact: true,
         component: () => (
           <BuyerPage>
-            <PersonalCenterForm />
+            <PersonalCenter />
+          </BuyerPage>
+        ),
+      },
+      {
+        path: "/buyer/contact",
+        key: "BUYER_CONTACT",
+        exact: true,
+        component: () => (
+          <BuyerPage>
+            <h1>1</h1>
+          </BuyerPage>
+        ),
+      },
+      {
+        path: "/buyer/market",
+        key: "BUYER_MARKET",
+        exact: true,
+        component: () => (
+          <BuyerPage>
+            <h1>1</h1>
           </BuyerPage>
         ),
       },

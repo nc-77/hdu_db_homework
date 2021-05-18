@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
 import "./Hero.css";
-import { Button } from "../components/Button";
+import Button from "../features/Button";
 import { useHistory } from "react-router";
 import HeroVideo from "../assets/videos/video-1.mp4";
 

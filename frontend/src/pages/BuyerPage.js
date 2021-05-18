@@ -8,25 +8,38 @@ export default function BuyerPage(props) {
 
   const [Info, setInfo] = useState("");
 
+  const event = {
+    test: () => {
+      console.log(1);
+    },
+  };
+
   const [NavItem] = useState([
-    {
-      NavBarName: "市场",
-      ToggleLink: () => {
-        RouterHistory.push("/buyer");
+    [
+      {
+        NavBarName: "二手交易平台",
       },
-    },
-    {
-      NavBarName: "个人中心",
-      ToggleLink: () => {
-        RouterHistory.push("/buyer/personalCenter");
+    ],
+    [
+      {
+        NavBarName: "市场",
+        ToggleLink: () => {
+          RouterHistory.push("/buyer/market");
+        },
       },
-    },
-    {
-      NavBarName: "联系",
-      ToggleLink: () => {
-        RouterHistory.push("/buyer/contact");
+      {
+        NavBarName: "个人中心",
+        ToggleLink: () => {
+          RouterHistory.push("/buyer/personalCenter");
+        },
       },
-    },
+      {
+        NavBarName: "联系",
+        ToggleLink: () => {
+          RouterHistory.push("/buyer/contact");
+        },
+      },
+    ],
   ]);
 
   useEffect(() => {
@@ -48,6 +61,7 @@ export default function BuyerPage(props) {
       {props.children &&
         React.cloneElement(props.children, {
           props: Info,
+          event: event,
         })}
     </>
   );

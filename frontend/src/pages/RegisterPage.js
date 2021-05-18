@@ -16,7 +16,6 @@ const data = {
 
 export default function Register() {
   const submitCallback = () => {
-    console.log(Info);
     axios.post(
       `http://localhost:8080/api/${Info.identity}/register`,
       GetFormData(Info)
