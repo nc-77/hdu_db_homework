@@ -214,6 +214,32 @@ paths:
       summary: 查询所有商品信息
       tags:
       - good
+  /good/filter:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据name,label筛选商品
+      parameters:
+      - description: 商品名
+        in: query
+        name: name
+        type: string
+      - description: 商品分类
+        in: query
+        name: label
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "筛选商品成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "筛选商品失败","data":""}'
+          schema:
+            type: string
+      summary: 指定条件筛选商品
+      tags:
+      - good
   /seller:
     get:
       consumes:

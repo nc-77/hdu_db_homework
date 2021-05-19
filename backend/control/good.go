@@ -1,8 +1,6 @@
 package control
 
 import (
-	"fmt"
-	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 	"hdu_db_homework/driver"
@@ -23,9 +21,9 @@ type goodWithImg struct {
 // @Failure 400 {string} json "{"code":"400","msg": "所有商品查询失败","data":""}"
 // @Router /good/all [get]
 func goodGetAllHandle(c *gin.Context) {
-	goods := make([]service.Good, 0)
-	if result := driver.DB.Find(&goods); result.Error != nil {
-		utils.FailResponse(c, result.Error)
+	goods, err := service.GetAllGoods()
+	if err != nil {
+		utils.FailResponse(c, err)
 		return
 	}
 	// 查询成功
@@ -99,18 +97,35 @@ func goodAddHandle(c *gin.Context) {
 
 	if result := driver.DB.Create(&good); result.Error != nil {
 		utils.FailResponse(c, utils.GoodAddError)
-		fmt.Println(errors.Wrap(result.Error, utils.GoodAddError.Error()))
 		return
 	}
 	// 上传img至图床
 	imgUrl, err := driver.UploadToOss(c, good.ID)
 	if err != nil {
 		utils.FailResponse(c, errors.WithMessage(err, "file upload to oss failed"))
-		fmt.Printf("%v\n", err)
 		return
 	}
-	data := structs.Map(good)
-	data["imgUrl"] = imgUrl
-	utils.SucResponse(c, "商品添加成功", data)
+	good.ImgUrl = imgUrl
+	utils.SucResponse(c, "商品添加成功", good)
 
+}
+
+// @Summary 指定条件筛选商品
+// @Description 根据name,label筛选商品
+// @Tags good
+// @Accept mpfd
+// @Param name query string false "商品名"
+// @Param label query string false "商品分类"
+// @Success 200 {string} json "{"code":"200","msg": "筛选商品成功","data":""}"
+// @Failure 400 {string} json "{"code":"400","msg": "筛选商品失败","data":""}"
+// @Router /good/filter [get]
+func goodSearchHandle(c *gin.Context) {
+	name := c.Query("name")
+	label := c.Query("label")
+	goods, err := service.FilterGoods(name, label)
+	if err != nil {
+		utils.FailResponse(c, err)
+		return
+	}
+	utils.SucResponse(c, "筛选商品成功", goods)
 }

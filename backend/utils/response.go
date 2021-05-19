@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +13,6 @@ func FailResponse(c *gin.Context, msg error) {
 }
 
 func SucResponse(c *gin.Context, msg string, data interface{}) {
-	fmt.Println(data)
 	c.JSON(200, gin.H{
 		"code": 200,
 		"msg":  msg,
