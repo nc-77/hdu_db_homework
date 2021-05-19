@@ -23,6 +23,7 @@ func JwtAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
+		c.Set("id", claims.Id)
 		c.Set("username", claims.Username)
 		c.Set("scope", claims.Scope)
 

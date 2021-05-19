@@ -9,7 +9,7 @@ import (
 )
 
 type Buyer struct {
-	ID        uint           ` json:"id" gorm:"primarykey"`
+	ID        int            ` json:"id" gorm:"primarykey"`
 	Name      string         ` json:"name" form:"name"`
 	Phone     string         `json:"phone" form:"phone"`
 	Username  string         ` json:"username" form:"username"`

@@ -44,6 +44,8 @@ func InitRouter() *gin.Engine {
 	goodGroup := r.Group("/api/good")
 	{
 		goodGroup.GET("/all", goodGetAllHandle)
+		goodGroup.GET("", middleWare.JwtAuth(), goodGetHandle)
+		goodGroup.POST("", middleWare.JwtAuth(), goodAddHandle)
 	}
 	return r
 }

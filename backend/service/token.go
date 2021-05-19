@@ -17,11 +17,13 @@ type Claims struct {
 	Username string
 	Scope    string // 权限控制
 	jwt.StandardClaims
+	Id int
 }
 
-func CreateToken(username, scope string) (string, error) {
+func CreateToken(id int, username, scope string) (string, error) {
 	/* 根据用户身份生成claim */
 	claims := Claims{
+		Id:       id,
 		Username: username,
 		Scope:    scope,
 		StandardClaims: jwt.StandardClaims{

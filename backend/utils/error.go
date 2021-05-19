@@ -14,4 +14,7 @@ var (
 	ParseTokenError  = errors.New("用户Token错误")
 	TokenValidError  = errors.New("用户Token已过期")
 	AuthError        = errors.New("未允许的授权")
+	GoodAddError     = errors.New("商品添加失败")
+	GoodSelectError  = errors.New("商品查询失败")
+	FileTypeError    = errors.New("文件类型错误")
 )

@@ -200,13 +200,110 @@
                 }
             }
         },
-        "/good/all": {
+        "/good": {
             "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "查询卖家token查询上架商品信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "good"
+                ],
+                "summary": "查询商品信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"商品查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"商品查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据卖家token添加商品信息,商品图片url默认为http://pic.nc-77.top/商品id.jpg",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "good"
+                ],
+                "summary": "卖家上传商品信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "商品名",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "商品价格",
+                        "name": "price",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "商品分类",
+                        "name": "label",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "商品数量",
+                        "name": "number",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "商品描述",
+                        "name": "text",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "file",
+                        "description": "商品图片",
+                        "name": "file",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"商品上架成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"商品上架失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/good/all": {
+            "get": {
                 "description": "查询所有商品信息",
                 "consumes": [
                     "multipart/form-data"

@@ -131,6 +131,72 @@ paths:
       summary: 买家注册
       tags:
       - buyer
+  /good:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 查询卖家token查询上架商品信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "商品查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "商品查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询商品信息
+      tags:
+      - good
+    post:
+      consumes:
+      - multipart/form-data
+      description: 根据卖家token添加商品信息,商品图片url默认为http://pic.nc-77.top/商品id.jpg
+      parameters:
+      - description: 商品名
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: 商品价格
+        in: formData
+        name: price
+        required: true
+        type: integer
+      - description: 商品分类
+        in: formData
+        name: label
+        required: true
+        type: string
+      - description: 商品数量
+        in: formData
+        name: number
+        required: true
+        type: integer
+      - description: 商品描述
+        in: formData
+        name: text
+        type: string
+      - description: 商品图片
+        in: formData
+        name: file
+        type: file
+      responses:
+        "200":
+          description: '{"code":"200","msg": "商品上架成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "商品上架失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 卖家上传商品信息
+      tags:
+      - good
   /good/all:
     get:
       consumes:
@@ -145,8 +211,6 @@ paths:
           description: '{"code":"400","msg": "所有商品查询失败","data":""}'
           schema:
             type: string
-      security:
-      - ApiKeyAuth: []
       summary: 查询所有商品信息
       tags:
       - good

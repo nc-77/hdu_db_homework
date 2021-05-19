@@ -10,6 +10,7 @@ import (
 )
 
 type Result struct {
+	Id       int
 	Username string
 	Password string
 }
@@ -35,7 +36,7 @@ func loginHandle(tableName string) gin.HandlerFunc {
 		}
 
 		/* 检查是否已经注册 */
-		if tx := driver.DB.Raw(fmt.Sprintf("SELECT username,password FROM %v where username = ?", tableName), username).Scan(&result); tx.RowsAffected == 0 {
+		if tx := driver.DB.Raw(fmt.Sprintf("SELECT id,username,password FROM %v where username = ?", tableName), username).Scan(&result); tx.RowsAffected == 0 {
 			utils.FailResponse(c, utils.NotExistError)
 			return
 		}
@@ -47,7 +48,7 @@ func loginHandle(tableName string) gin.HandlerFunc {
 		}
 
 		/* 根据username,user属性生成token */
-		token, err := service.CreateToken(username, tableName[:len(tableName)-1])
+		token, err := service.CreateToken(result.Id, username, tableName[:len(tableName)-1])
 		if err != nil {
 			utils.FailResponse(c, utils.CreateTokenError)
 			return
