@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Market from "../components/Market";
+import PersonalCenter from "../components/PersonalCenter";
+import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
@@ -9,7 +12,7 @@ const ROUTES = [
     path: "/",
     key: "ROOT",
     exact: true,
-    component: Hero,
+    component: () => <Hero />,
   },
   {
     path: "/login",
@@ -24,19 +27,62 @@ const ROUTES = [
     component: () => <Register />,
   },
   {
-    path: "/app",
-    key: "APP",
+    path: "/buyer",
+    key: "BUYER",
     component: RenderRoutes,
     routes: [
       {
-        path: "/app",
-        key: "APP_ROOT",
+        path: "/buyer",
+        key: "BUYER_ROOT",
+        exact: true,
+        component: () => <BuyerPage />,
+      },
+      {
+        path: "/buyer/personalCenter",
+        key: "BUYER_PERSONALCENTER",
+        exact: true,
+        component: () => (
+          <BuyerPage>
+            <PersonalCenter />
+          </BuyerPage>
+        ),
+      },
+      {
+        path: "/buyer/contact",
+        key: "BUYER_CONTACT",
+        exact: true,
+        component: () => (
+          <BuyerPage>
+            <h1>1</h1>
+          </BuyerPage>
+        ),
+      },
+      {
+        path: "/buyer/market",
+        key: "BUYER_MARKET",
+        exact: true,
+        component: () => (
+          <BuyerPage>
+            <Market />
+          </BuyerPage>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/seller",
+    key: "SELLER",
+    component: RenderRoutes,
+    routes: [
+      {
+        path: "/seller",
+        key: "SELLER_ROOT",
         exact: true,
         component: () => <h1>App Index</h1>,
       },
       {
-        path: "/app/page",
-        key: "APP_PAGE",
+        path: "/seller/personalCenter",
+        key: "SELLER_PAGE",
         exact: true,
         component: () => <h1>App Page</h1>,
       },

@@ -1,15 +1,20 @@
-import useForm from "../components/useFrom";
+import useForm from "../components/useForm";
 import React from "react";
 import axios from "axios";
 import getFormData from "../utils/GetFormData";
+import { useHistory } from "react-router";
+import DragonImg from "../assets/images/dragon.jpg";
+import "./LoginPage.css";
 
 const data = {
   username: "",
   password: "",
-  identity: "",
+  identity: "buyer",
 };
 
 export default function Login() {
+  let RouterHistory = useHistory();
+
   const submitCallback = () => {
     axios
       .post(
@@ -19,48 +24,65 @@ export default function Login() {
       .then((res) => {
         const responseData = JSON.parse(res.request.response);
         const token = responseData.data.token;
+        const status = responseData.code;
         localStorage.setItem(`user_token_${Info.identity}`, token);
+        if (status) {
+          RouterHistory.push(`/${Info.identity}`);
+        }
       });
   };
 
   const [Info, handleChange, handleSubmit] = useForm(data, submitCallback);
 
   return (
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group text-left">
-          <label>学号</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete="on"
-            id="username"
-            placeholder="Enter username"
-            value={Info.username}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group text-left">
-          <label>密码</label>
-          <input
-            type="password"
-            className="form-control"
-            autoComplete="on"
-            id="password"
-            placeholder="Password"
-            value={Info.password}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group text-left">
-          <label>选择身份</label>
-          <select id="identity" onChange={handleChange} value={Info.identity}>
-            <option value="buyer">买家</option>
-            <option value="seller">卖家</option>
-          </select>
-        </div>
-        <input type="submit" className="btn btn-primary" value="登录" />
-      </form>
+    <div className="form-container">
+      <div className="form-content-left">
+        <img className="form-img" src={DragonImg} alt="dragon" />
+      </div>
+      <div className="form-content-right">
+        <form onSubmit={handleSubmit} className="form" noValidate>
+          <div className="form-inputs">
+            <label className="form-label">学号</label>
+            <input
+              className="form-input-loginPage"
+              type="text"
+              id="username"
+              placeholder="8位学号"
+              value={Info.username || "" || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-inputs">
+            <label className="form-label">密码</label>
+            <input
+              className="form-input-loginPage"
+              type="password"
+              id="password"
+              placeholder="输入密码"
+              value={Info.password || ""}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-inputs">
+            <label className="form-label">选择身份</label>
+            <select
+              className="form-input-loginPage"
+              id="identity"
+              onChange={handleChange}
+              value={Info.identity || ""}
+            >
+              <option value="buyer">买家</option>
+              <option value="seller">卖家</option>
+            </select>
+          </div>
+          <button className="form-input-btn" type="submit">
+            登录
+          </button>
+          <span className="form-input-login">
+            没有账号就<a href="/register">注册</a>吧～
+          </span>
+        </form>
+      </div>
     </div>
   );
 }

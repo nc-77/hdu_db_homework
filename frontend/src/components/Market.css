@@ -1,0 +1,88 @@
+.cards {
+  padding: 4rem;
+  background: #eee7be;
+  height: 90vh;
+}
+
+h1 {
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cards-wrapper {
+  position: relative;
+  margin: 50px 0 45px;
+}
+
+.cards-items {
+  margin-bottom: 24px;
+}
+
+.search-params {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.search-params form {
+  background-color: #d9c148;
+  width: 360px;
+  margin: 0px 25px 0px 0px;
+  padding: 35px 15px 15px 15px;
+  border-radius: 5px;
+  float: left;
+}
+
+.search {
+  background-color: #d9c148;
+  width: 715px;
+  padding: 15px;
+  border-radius: 9px;
+  float: left;
+  margin-bottom: 25px;
+}
+
+.search-params label {
+  display: block;
+  width: 60px;
+}
+
+.search-params input,
+.search-params select {
+  margin-bottom: 30px;
+  font-size: 18px;
+  height: 30px;
+  width: 325px;
+}
+
+.search-params button,
+#modal button,
+.details button {
+  background-color: #ad343e;
+  padding: 5px 25px;
+  color: white;
+  font-size: 18px;
+  border: #333 1px solid;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.search-params button:hover {
+  background-color: #122622;
+}
+
+.search-params button:active {
+  background-color: #5f1d22;
+}
+
+.search-params button:focus {
+  border: 1px solid cornflowerblue;
+}
