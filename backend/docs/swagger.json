@@ -328,6 +328,46 @@
                 }
             }
         },
+        "/good/filter": {
+            "get": {
+                "description": "根据name,label筛选商品",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "good"
+                ],
+                "summary": "指定条件筛选商品",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "商品名",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "商品分类",
+                        "name": "label",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"筛选商品成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"筛选商品失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/seller": {
             "get": {
                 "security": [
