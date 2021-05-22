@@ -99,13 +99,16 @@ func goodAddHandle(c *gin.Context) {
 		utils.FailResponse(c, utils.GoodAddError)
 		return
 	}
-	// 上传img至图床
-	imgUrl, err := driver.UploadToOss(c, good.ID)
-	if err != nil {
-		utils.FailResponse(c, errors.WithMessage(err, "file upload to oss failed"))
-		return
+	if file := c.PostForm("file"); file != "" {
+		// 上传img至图床
+		imgUrl, err := driver.UploadToOss(c, good.ID)
+		if err != nil {
+			utils.FailResponse(c, errors.WithMessage(err, "file upload to oss failed"))
+			return
+		}
+		good.ImgUrl = imgUrl
 	}
-	good.ImgUrl = imgUrl
+
 	utils.SucResponse(c, "商品添加成功", good)
 
 }
