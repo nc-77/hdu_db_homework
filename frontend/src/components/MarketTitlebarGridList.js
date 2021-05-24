@@ -6,19 +6,16 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import "./MarketTest.css";
+import "./MarketTitlebarGridList.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "block",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    display: "flex",
+    float: "left",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
     width: "94vh",
-    height: "94vh",
+    height: "90vh",
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
@@ -38,10 +35,6 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #83c7e3",
     color: "#fff",
     borderRadius: "25px",
-  },
-
-  subHeader: {
-    fontSize: "24px",
   },
 }));
 
@@ -71,39 +64,37 @@ const useStyles = makeStyles((theme) => ({
           </GridListTile> */
 }
 
-export default function TitlebarGridList({ MarketInfo, isMarketRender }) {
+export default function TitlebarGridList({ MarketInfo }) {
   const classes = useStyles();
 
   return (
-    isMarketRender && (
-      <div className={classes.root}>
-        <GridList cellHeight={360} className={classes.gridList}>
-          {MarketInfo.map((item) => (
-            <GridListTile key={item.id} className={`listTile-${item.id}`}>
-              <img src={item.img_url} alt={item.text} />
-              <aside className={classes.contact}>
-                {item.id}
-                <br />
-                {item.name}
-                <br />
-                {item.label}
-              </aside>
-              <GridListTileBar
-                title={item.name}
-                subtitle={<span>分类 {item.label}</span>}
-                actionIcon={
-                  <IconButton
-                    aria-label={`info about ${item.text}`}
-                    className={classes.icon}
-                  >
-                    <AddShoppingCartIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-    )
+    <div className={classes.root}>
+      <GridList cellHeight={360} className={classes.gridList}>
+        {MarketInfo.map((item) => (
+          <GridListTile key={item.id} className={`listTile-${item.id}`}>
+            <img src={item.img_url} alt={item.text} />
+            <aside className={classes.contact}>
+              {item.id}
+              <br />
+              {item.name}
+              <br />
+              {item.label}
+            </aside>
+            <GridListTileBar
+              title={item.name}
+              subtitle={<span>分类 {item.label}</span>}
+              actionIcon={
+                <IconButton
+                  aria-label={`info about ${item.text}`}
+                  className={classes.icon}
+                >
+                  <AddShoppingCartIcon />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+        ))}
+      </GridList>
+    </div>
   );
 }
