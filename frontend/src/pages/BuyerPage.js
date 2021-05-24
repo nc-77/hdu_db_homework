@@ -79,6 +79,9 @@ export default function BuyerPage(props) {
   };
   const [isMarketRender, setIsMarketRender] = useState(false);
   const [MarketInfo, setMarketInfo] = useState(props);
+  const [showModal, setShowModal] = useState(false);
+  console.log(showModal);
+  const modalChildren = <div>test</div>;
   const [
     searchParams,
     MarketHandleChange,
@@ -136,6 +139,9 @@ export default function BuyerPage(props) {
           MarketHandleSubmit: MarketHandleSubmit,
           searchParams: searchParams,
           setSearchParams: setSearchParams,
+          modalChildren: modalChildren,
+          showModal: showModal,
+          setShowModal: setShowModal,
         })}
     </>
   );

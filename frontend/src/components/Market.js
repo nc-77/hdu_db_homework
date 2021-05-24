@@ -1,15 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import CardItem from "../features/CardItem";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
 import "./Market.css";
 import useDropdown from "./useDropdown";
 
@@ -19,6 +10,7 @@ export default function Market({
   MarketHandleChange,
   MarketHandleSubmit,
   searchParams,
+  setShowModal,
 }) {
   console.log(MarketInfo);
   //const [breed, BreedDropdown, updateBreed] = useDropdown("Breed", "", breeds);
@@ -49,12 +41,16 @@ export default function Market({
                 <option value="seller">卖家</option>
               </select>
             </div> */}
-            <button className="form-input-btn" type="submit">
+            <button
+              className="form-input-btn"
+              type="submit"
+              onClick={() => setShowModal(true)}
+            >
               搜索
             </button>
           </form>
           <div className="search">
-            {MarketInfo.map((item) => {
+            {/* {MarketInfo.map((item) => {
               return (
                 <>
                   <div className="image-container">
@@ -66,7 +62,7 @@ export default function Market({
                   </div>
                 </>
               );
-            })}
+            })} */}
           </div>
         </>
       )}
