@@ -6,6 +6,8 @@ import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
+import Modal from "../components/Modal";
+import TitlebarGridList from "../components/MarketTest";
 
 const ROUTES = [
   {
@@ -62,9 +64,12 @@ const ROUTES = [
         key: "BUYER_MARKET",
         exact: true,
         component: () => (
-          <BuyerPage>
-            <Market />
-          </BuyerPage>
+          <>
+            <BuyerPage>
+              {/*  <Market /> */}
+              <TitlebarGridList />
+            </BuyerPage>
+          </>
         ),
       },
     ],

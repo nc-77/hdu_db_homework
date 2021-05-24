@@ -2,7 +2,11 @@ import "./App.css";
 import ROUTES, { RenderRoutes } from "./router/router";
 
 function App() {
-  return <RenderRoutes routes={ROUTES} />;
+  return (
+    <>
+      <RenderRoutes routes={ROUTES} />
+    </>
+  );
 }
 
 export default App;
