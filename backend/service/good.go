@@ -27,10 +27,13 @@ func GetAllGoods() ([]Good, error) {
 	return goods, errors.Wrap(result.Error, "获取所有商品失败")
 }
 
-func FilterGoods(name, label string) ([]Good, error) {
+func FilterGoods(id, name, label string) ([]Good, error) {
+
 	goods := make([]Good, 0)
 	var result *gorm.DB
-	if label != "" {
+	if id != "" {
+		result = driver.DB.Where("id = ?", id).Find(&goods)
+	} else if label != "" {
 		result = driver.DB.Where("name like ? and label = ?", "%"+name+"%", label).Find(&goods)
 	} else {
 		result = driver.DB.Where("name like ? ", "%"+name+"%", label).Find(&goods)

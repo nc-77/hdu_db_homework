@@ -347,7 +347,7 @@ var doc = `{
         },
         "/good/filter": {
             "get": {
-                "description": "根据name,label筛选商品",
+                "description": "根据id,name,label筛选商品 有id参数时忽略name及label参数",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -356,6 +356,12 @@ var doc = `{
                 ],
                 "summary": "指定条件筛选商品",
                 "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "商品id",
+                        "name": "buyer_id",
+                        "in": "query"
+                    },
                     {
                         "type": "string",
                         "description": "商品名",

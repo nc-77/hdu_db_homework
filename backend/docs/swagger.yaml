@@ -219,8 +219,12 @@ paths:
     get:
       consumes:
       - multipart/form-data
-      description: 根据name,label筛选商品
+      description: 根据id,name,label筛选商品 有id参数时忽略name及label参数
       parameters:
+      - description: 商品id
+        in: query
+        name: buyer_id
+        type: integer
       - description: 商品名
         in: query
         name: name

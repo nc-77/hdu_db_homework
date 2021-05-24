@@ -115,9 +115,10 @@ func goodAddHandle(c *gin.Context) {
 }
 
 // @Summary 指定条件筛选商品
-// @Description 根据name,label筛选商品
+// @Description 根据id,name,label筛选商品 有id参数时忽略name及label参数
 // @Tags good
 // @Accept mpfd
+// @Param buyer_id query int false "商品id"
 // @Param name query string false "商品名"
 // @Param label query string false "商品分类"
 // @Success 200 {string} json "{"code":"200","msg": "筛选商品成功","data":""}"
@@ -126,7 +127,8 @@ func goodAddHandle(c *gin.Context) {
 func goodSearchHandle(c *gin.Context) {
 	name := c.Query("name")
 	label := c.Query("label")
-	goods, err := service.FilterGoods(name, label)
+	id := c.Query("buyer_id")
+	goods, err := service.FilterGoods(id, name, label)
 	if err != nil {
 		utils.FailResponse(c, err)
 		return
