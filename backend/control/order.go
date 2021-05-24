@@ -1,6 +1,7 @@
 package control
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"hdu_db_homework/driver"
 	"hdu_db_homework/service"
@@ -35,10 +36,13 @@ func orderAddHandle(c *gin.Context) {
 		return
 	}
 	if err := c.ShouldBind(&order); err != nil {
+
 		utils.FailResponse(c, utils.OrderAddError)
 		return
 	}
+	fmt.Println(order)
 	if result := driver.DB.Create(&order); result.Error != nil {
+
 		utils.FailResponse(c, utils.OrderAddError)
 		return
 	}
