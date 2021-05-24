@@ -31,7 +31,7 @@ func FilterGoods(name, label string) ([]Good, error) {
 	goods := make([]Good, 0)
 	var result *gorm.DB
 	if label != "" {
-		result = driver.DB.Where("name like ? and label == ?", "%"+name+"%", label).Find(&goods)
+		result = driver.DB.Where("name like ? and label = ?", "%"+name+"%", label).Find(&goods)
 	} else {
 		result = driver.DB.Where("name like ? ", "%"+name+"%", label).Find(&goods)
 	}
