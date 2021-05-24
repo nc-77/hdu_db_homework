@@ -55,6 +55,7 @@ func UploadToLocal(c *gin.Context, goodId int) (string, error) {
 
 }
 func UploadToOss(c *gin.Context, goodId int) (string, error) {
+
 	filePath, err := UploadToLocal(c, goodId)
 	if err != nil {
 		return "", errors.WithMessage(err, "文件保存至本地失败")

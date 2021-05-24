@@ -48,5 +48,11 @@ func InitRouter() *gin.Engine {
 		goodGroup.GET("/filter", goodSearchHandle)
 		goodGroup.POST("", middleWare.JwtAuth(), goodAddHandle)
 	}
+
+	orderGroup := r.Group("/api/order")
+	{
+		orderGroup.POST("", middleWare.JwtAuth(), orderAddHandle)
+
+	}
 	return r
 }

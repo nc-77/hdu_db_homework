@@ -89,7 +89,7 @@ func sellerUpdateHandle(c *gin.Context) {
 	}
 	// 绑定表单
 	if err := c.ShouldBind(&seller); err != nil {
-		utils.FailResponse(c, err)
+		utils.FailResponse(c, utils.UserUpdateError)
 		return
 	}
 

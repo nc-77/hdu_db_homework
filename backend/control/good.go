@@ -2,7 +2,6 @@ package control
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pkg/errors"
 	"hdu_db_homework/driver"
 	"hdu_db_homework/service"
 	"hdu_db_homework/utils"
@@ -65,7 +64,7 @@ func goodGetHandle(c *gin.Context) {
 // @Tags good
 // @Accept mpfd
 // @Param name formData string true "商品名"
-// @Param price formData int true "商品价格"
+// @Param price formData float32 true "商品价格"
 // @Param label formData string true "商品分类"
 // @Param number formData int true "商品数量"
 // @Param text formData string false "商品描述"
@@ -91,22 +90,24 @@ func goodAddHandle(c *gin.Context) {
 	}
 	// 绑定表单
 	if err := c.ShouldBind(&good); err != nil {
-		utils.FailResponse(c, err)
+		utils.FailResponse(c, utils.GoodAddError)
+		return
 	}
 	good.SellerId = seller.ID
-
 	if result := driver.DB.Create(&good); result.Error != nil {
 		utils.FailResponse(c, utils.GoodAddError)
 		return
 	}
-	if file := c.PostForm("file"); file != "" {
+
+	_, err := c.FormFile("file")
+	if err == nil {
 		// 上传img至图床
 		imgUrl, err := driver.UploadToOss(c, good.ID)
 		if err != nil {
-			utils.FailResponse(c, errors.WithMessage(err, "file upload to oss failed"))
+			utils.FailResponse(c, err)
 			return
 		}
-		good.ImgUrl = imgUrl
+		driver.DB.Model(&good).Update("img_url", imgUrl)
 	}
 
 	utils.SucResponse(c, "商品添加成功", good)

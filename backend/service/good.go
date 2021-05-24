@@ -13,7 +13,7 @@ type Good struct {
 	Price     float32        `json:"price" form:"price"`
 	Label     string         `json:"label" form:"label"`
 	Text      string         `json:"text" form:"text"`
-	SellerId  int            `json:"sellerId" form:"sellerId"`
+	SellerId  int            `json:"seller_id" form:"seller_id"`
 	Number    int            `json:"number" form:"number"`
 	ImgUrl    string         `json:"img_url" form:"img_url"`
 	CreatedAt time.Time      `json:"created_at" `

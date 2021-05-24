@@ -253,7 +253,7 @@
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "number",
                         "description": "商品价格",
                         "name": "price",
                         "in": "formData",
@@ -361,6 +361,60 @@
                     },
                     "400": {
                         "description": "{\"code\":\"400\",\"msg\": \"筛选商品失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/order": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "买家登录后(需要token)通过该接口下单",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "买家下单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "下单商品id",
+                        "name": "good_id",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "下单商品数量",
+                        "name": "number",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "线下交易日期",
+                        "name": "trade_date",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"商品下单成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"商品下单失败\",\"data\":\"\"}",
                         "schema": {
                             "type": "string"
                         }
