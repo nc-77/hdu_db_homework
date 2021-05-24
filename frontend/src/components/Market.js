@@ -1,10 +1,8 @@
-import axios from "axios";
-import React, { useState } from "react";
-import CardItem from "../features/CardItem";
+import React from "react";
 import "./Market.css";
-import useDropdown from "./useDropdown";
 import MarketTitlebarGridList from "./MarketTitlebarGridList";
 import MarketSearchBar from "./MarketSearchBar";
+import ShoppingCart from "./ShoppingCart";
 
 export default function Market({
   MarketInfo,
@@ -12,23 +10,36 @@ export default function Market({
   MarketHandleChange,
   MarketHandleSubmit,
   searchParams,
-  setShowModal,
+  handleCart,
+  cartInfo,
+  showCart,
+  orderInfo,
+  OrderHandleChange,
+  OrderHandleSubmit,
 }) {
-  console.log(MarketInfo);
-  //const [breed, BreedDropdown, updateBreed] = useDropdown("Breed", "", breeds);
-  console.log(searchParams);
-
   return (
     <div id="market">
       {isMarketRender && (
         <>
-          <MarketTitlebarGridList MarketInfo={MarketInfo} />
-          {/*  */}
-          <MarketSearchBar
-            MarketHandleChange={MarketHandleChange}
-            MarketHandleSubmit={MarketHandleSubmit}
-            searchParams={searchParams}
+          <MarketTitlebarGridList
+            MarketInfo={MarketInfo}
+            handleCart={handleCart}
           />
+          <div className="market-search-params">
+            <MarketSearchBar
+              MarketHandleChange={MarketHandleChange}
+              MarketHandleSubmit={MarketHandleSubmit}
+              searchParams={searchParams}
+            />
+            {showCart && (
+              <ShoppingCart
+                cartInfo={cartInfo}
+                orderInfo={orderInfo}
+                OrderHandleChange={OrderHandleChange}
+                OrderHandleSubmit={OrderHandleSubmit}
+              />
+            )}
+          </div>
         </>
       )}
     </div>

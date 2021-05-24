@@ -8,30 +8,6 @@ import useForm from "../components/useForm";
 export default function BuyerPage(props) {
   let RouterHistory = useHistory();
 
-  useEffect(() => {
-    const user_buyer_token = localStorage.getItem("user_token_buyer");
-    axios
-      .get(`http://localhost:8080/api/buyer/myself`, {
-        headers: {
-          Authorization: `Bear ${user_buyer_token}`,
-        },
-      })
-      .then((res) => {
-        const data = {
-          username: res.data.data.username,
-          name: res.data.data.name,
-          phone: res.data.data.phone,
-          nickname: res.data.data.nickname,
-        };
-        setPersonalCenterInfo(data);
-        setIsPersonalCenterRender(true);
-      });
-    axios.get("http://localhost:8080/api/good/all").then((res) => {
-      setMarketInfo(res.data.data);
-      setIsMarketRender(true);
-    });
-  }, []);
-
   /*    个人中心    */
 
   const [isEdit, setIsEdit] = useState(false);
@@ -85,11 +61,36 @@ export default function BuyerPage(props) {
       });
     console.log(searchParams);
   };
+
+  const handleCart = (item) => {
+    console.log(item.target.ariaLabel);
+    axios
+      .get(`http://localhost:8080/api/good/filter`, {
+        params: { name: item.target.ariaLabel },
+      })
+      .then((res) => {
+        orderInfo.id = res.data.data[0].id;
+        // 更新cart状态后会重新刷一次，所以要把赋值语句放上面
+        setCartInfo(res.data.data);
+        setShowCart(true);
+      });
+  };
+
+  const orderSubmitCallback = () => {
+    console.log(orderInfo);
+  };
+
   const [isMarketRender, setIsMarketRender] = useState(false);
-  const [MarketInfo, setMarketInfo] = useState(props);
-  const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
-  const modalChildren = <div>test</div>;
+  const [marketInfo, setMarketInfo] = useState(props);
+  const [cartInfo, setCartInfo] = useState();
+  const [showCart, setShowCart] = useState(false);
+  const orderData = {
+    id: "",
+    tradeDate: "",
+    number: "",
+  };
+  const [orderInfo, OrderHandleChange, OrderHandleSubmit, setOrderInfo] =
+    useForm(orderData, orderSubmitCallback);
   const [
     searchParams,
     MarketHandleChange,
@@ -131,6 +132,32 @@ export default function BuyerPage(props) {
 
   /*    导航栏    */
 
+  /* 初始化useEffect */
+
+  useEffect(() => {
+    const user_buyer_token = localStorage.getItem("user_token_buyer");
+    axios
+      .get(`http://localhost:8080/api/buyer/myself`, {
+        headers: {
+          Authorization: `Bear ${user_buyer_token}`,
+        },
+      })
+      .then((res) => {
+        const data = {
+          username: res.data.data.username,
+          name: res.data.data.name,
+          phone: res.data.data.phone,
+          nickname: res.data.data.nickname,
+        };
+        setPersonalCenterInfo(data);
+        setIsPersonalCenterRender(true);
+      });
+    axios.get("http://localhost:8080/api/good/all").then((res) => {
+      setMarketInfo(res.data.data);
+      setIsMarketRender(true);
+    });
+  }, [setPersonalCenterInfo]);
+
   return (
     <>
       <Navbar defaultState={NavItem} />
@@ -141,15 +168,18 @@ export default function BuyerPage(props) {
           isEdit: isEdit,
           isPersonalCenterRender: isPersonalCenterRender,
           personalCenterHandleChange: personalCenterHandleChange,
-          MarketInfo: MarketInfo,
+          MarketInfo: marketInfo,
           isMarketRender: isMarketRender,
           MarketHandleChange: MarketHandleChange,
           MarketHandleSubmit: MarketHandleSubmit,
           searchParams: searchParams,
           setSearchParams: setSearchParams,
-          modalChildren: modalChildren,
-          showModal: showModal,
-          setShowModal: setShowModal,
+          handleCart: handleCart,
+          cartInfo: cartInfo,
+          showCart: showCart,
+          orderInfo: orderInfo,
+          OrderHandleChange: OrderHandleChange,
+          OrderHandleSubmit: OrderHandleSubmit,
         })}
     </>
   );

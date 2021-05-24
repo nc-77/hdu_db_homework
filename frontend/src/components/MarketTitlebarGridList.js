@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import "./MarketTitlebarGridList.css";
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     float: "left",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
-    width: "94vh",
+    width: "100vh",
     height: "90vh",
   },
   icon: {
@@ -56,15 +55,7 @@ const useStyles = makeStyles((theme) => ({
  * ];
  */
 
-{
-  /* <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-            <ListSubheader component="div" className={classes.subHeader}>
-              货物
-            </ListSubheader>
-          </GridListTile> */
-}
-
-export default function TitlebarGridList({ MarketInfo }) {
+export default function TitlebarGridList({ MarketInfo, handleCart }) {
   const classes = useStyles();
 
   return (
@@ -85,10 +76,11 @@ export default function TitlebarGridList({ MarketInfo }) {
               subtitle={<span>分类 {item.label}</span>}
               actionIcon={
                 <IconButton
-                  aria-label={`info about ${item.text}`}
+                  aria-label={`${item.name}`}
                   className={classes.icon}
+                  onClick={handleCart}
                 >
-                  <AddShoppingCartIcon />
+                  <AddShoppingCartIcon aria-label={`${item.name}`} />
                 </IconButton>
               }
             />
