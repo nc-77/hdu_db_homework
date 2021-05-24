@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../features/Navbar";
 import { useHistory } from "react-router";
-import getFormData from "../utils/GetFormData";
+import GetFormData from "../utils/GetFormData";
 import useForm from "../components/useForm";
 
 export default function BuyerPage(props) {
@@ -11,7 +11,7 @@ export default function BuyerPage(props) {
   useEffect(() => {
     const user_buyer_token = localStorage.getItem("user_token_buyer");
     axios
-      .get(`http://localhost:8080/api/buyer`, {
+      .get(`http://localhost:8080/api/buyer/myself`, {
         headers: {
           Authorization: `Bear ${user_buyer_token}`,
         },
@@ -50,7 +50,7 @@ export default function BuyerPage(props) {
       axios
         .put(
           `http://localhost:8080/api/buyer`,
-          getFormData(personalCenterInfo),
+          GetFormData(personalCenterInfo),
           {
             headers: {
               Authorization: `Bear ${user_buyer_token}`,
@@ -75,6 +75,14 @@ export default function BuyerPage(props) {
   /*    市场    */
   const marketSubmitCallback = () => {
     //axios.get().then((res) => {setMarketInfo(res)});
+    axios
+      .get(`http://localhost:8080/api/good/filter`, {
+        params: { name: searchParams.name, label: searchParams.label },
+      })
+      .then((res) => {
+        setMarketInfo(res.data.data);
+        console.log(res);
+      });
     console.log(searchParams);
   };
   const [isMarketRender, setIsMarketRender] = useState(false);

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import CardItem from "../features/CardItem";
 import "./Market.css";
 import useDropdown from "./useDropdown";
+import MarketTitlebarGridList from "./MarketTitlebarGridList";
+import MarketSearchBar from "./MarketSearchBar";
 
 export default function Market({
   MarketInfo,
@@ -17,53 +19,16 @@ export default function Market({
   console.log(searchParams);
 
   return (
-    <div className="search-params">
+    <div id="market">
       {isMarketRender && (
         <>
-          <form onSubmit={MarketHandleSubmit} className="form" noValidate>
-            <label className="form-label">物品名称</label>
-            <input
-              className="form-input-loginPage"
-              type="text"
-              id="name"
-              placeholder="名称"
-              value={searchParams.name || ""}
-              onChange={MarketHandleChange}
-            />
-            {/* <div className="form-inputs">
-              <label className="form-label">选择身份</label>
-              <select
-                className="form-input-loginPage"
-                id="identity"
-                onChange={MarketHandleChange}
-              >
-                <option value="buyer">买家</option>
-                <option value="seller">卖家</option>
-              </select>
-            </div> */}
-            <button
-              className="form-input-btn"
-              type="submit"
-              onClick={() => setShowModal(true)}
-            >
-              搜索
-            </button>
-          </form>
-          <div className="search">
-            {/* {MarketInfo.map((item) => {
-              return (
-                <>
-                  <div className="image-container">
-                    <img src="http://placecorgi.com/300/300" alt={item.id} />
-                  </div>
-                  <div className="info">
-                    <h1>{item.name}</h1>
-                    <h2>{`${item.id} — ${item.des} — ${item.class}`}</h2>
-                  </div>
-                </>
-              );
-            })} */}
-          </div>
+          <MarketTitlebarGridList MarketInfo={MarketInfo} />
+          {/*  */}
+          <MarketSearchBar
+            MarketHandleChange={MarketHandleChange}
+            MarketHandleSubmit={MarketHandleSubmit}
+            searchParams={searchParams}
+          />
         </>
       )}
     </div>
