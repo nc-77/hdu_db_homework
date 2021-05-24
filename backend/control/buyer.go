@@ -43,7 +43,7 @@ func buyerRegisterHandle(c *gin.Context) {
 // @Accept mpfd
 // @Success 200 {string} json "{"code":"200","msg": "用户查询成功","data":""}"
 // @Failure 400 {string} json "{"code":"400","msg": "用户查询失败","data":""}"
-// @Router /buyer [get]
+// @Router /buyer/myself [get]
 func buyerGetHandle(c *gin.Context) {
 	var buyer service.Buyer
 	username, _ := c.Get("username")

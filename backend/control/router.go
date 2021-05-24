@@ -22,7 +22,8 @@ func InitRouter() *gin.Engine {
 	buyerGroup := r.Group("/api/buyer")
 	{
 
-		buyerGroup.GET("", middleWare.JwtAuth(), buyerGetHandle)
+		buyerGroup.GET("/myself", middleWare.JwtAuth(), buyerGetHandle)
+
 		//buyerGroup.PUT("", service.UpdateBuyer)
 		buyerGroup.POST("/login", loginHandle("buyers"))
 		buyerGroup.POST("/register", buyerRegisterHandle)
@@ -33,8 +34,8 @@ func InitRouter() *gin.Engine {
 	sellerGroup := r.Group("/api/seller")
 	{
 		sellerGroup.GET("/ping", ping)
-		sellerGroup.GET("", middleWare.JwtAuth(), sellerGetHandle)
-
+		sellerGroup.GET("/myself", middleWare.JwtAuth(), sellerGetSelfHandle)
+		sellerGroup.GET("", middleWare.JwtAuth(), sellerGetHandler)
 		sellerGroup.POST("/login", loginHandle("sellers"))
 		sellerGroup.POST("/register", sellerRegisterHandle)
 		sellerGroup.PUT("", middleWare.JwtAuth(), sellerUpdateHandle)

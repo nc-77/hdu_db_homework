@@ -34,35 +34,6 @@ var doc = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/buyer": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据token获取买家个人信息",
-                "consumes": [
-                    "multipart/form-data"
-                ],
-                "tags": [
-                    "buyer"
-                ],
-                "summary": "查询买家个人信息",
-                "responses": {
-                    "200": {
-                        "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "{\"code\":\"400\",\"msg\": \"用户查询失败\",\"data\":\"\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
             "put": {
                 "security": [
                     {
@@ -148,6 +119,37 @@ var doc = `{
                     },
                     "400": {
                         "description": "{\"code\":\"400\",\"msg\": \"登录失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/buyer/myself": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据token获取买家个人信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "buyer"
+                ],
+                "summary": "查询买家个人信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户查询失败\",\"data\":\"\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -444,7 +446,7 @@ var doc = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "根据token获取卖家个人信息",
+                "description": "根据id获取卖家个人信息",
                 "consumes": [
                     "multipart/form-data"
                 ],
@@ -452,6 +454,15 @@ var doc = `{
                     "seller"
                 ],
                 "summary": "查询卖家个人信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "卖家id",
+                        "name": "seller_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",
@@ -552,6 +563,37 @@ var doc = `{
                     },
                     "400": {
                         "description": "{\"code\":\"400\",\"msg\": \"登录失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/seller/myself": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据token获取卖家个人信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "seller"
+                ],
+                "summary": "查询卖家个人信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"用户查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"用户查询失败\",\"data\":\"\"}",
                         "schema": {
                             "type": "string"
                         }

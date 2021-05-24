@@ -2,8 +2,11 @@ package control
 
 import (
 	"github.com/gin-gonic/gin"
+	"hdu_db_homework/driver"
 	"hdu_db_homework/service"
 	"hdu_db_homework/utils"
+	"log"
+	"strconv"
 )
 
 // @Summary 卖家注册
@@ -43,8 +46,8 @@ func sellerRegisterHandle(c *gin.Context) {
 // @Accept mpfd
 // @Success 200 {string} json "{"code":"200","msg": "用户查询成功","data":""}"
 // @Failure 400 {string} json "{"code":"400","msg": "用户查询失败","data":""}"
-// @Router /seller [get]
-func sellerGetHandle(c *gin.Context) {
+// @Router /seller/myself [get]
+func sellerGetSelfHandle(c *gin.Context) {
 	var seller service.Seller
 	username, _ := c.Get("username")
 	scopeGet, _ := c.Get("scope")
@@ -62,6 +65,33 @@ func sellerGetHandle(c *gin.Context) {
 		return
 	}
 	// 查询成功
+	utils.SucResponse(c, "用户查询成功", seller)
+}
+
+// @Security ApiKeyAuth
+// @Summary 查询卖家个人信息
+// @Description 根据id获取卖家个人信息
+// @Tags seller
+// @Accept mpfd
+// @Param seller_id query int true "卖家id"
+// @Success 200 {string} json "{"code":"200","msg": "用户查询成功","data":""}"
+// @Failure 400 {string} json "{"code":"400","msg": "用户查询失败","data":""}"
+// @Router /seller [get]
+func sellerGetHandler(c *gin.Context) {
+	var seller service.Seller
+	id := c.Query("seller_id")
+	seller.ID, _ = strconv.Atoi(id)
+	scopeGet, _ := c.Get("scope")
+	scope, _ := scopeGet.(string)
+	// 权限验证
+	if scope != "buyer" && scope != "seller" && scope != "admin" {
+		utils.FailResponse(c, utils.AuthError)
+		return
+	}
+	if result := driver.DB.First(&seller); result.Error != nil {
+		log.Println(result.Error)
+		utils.FailResponse(c, utils.NotExistError)
+	}
 	utils.SucResponse(c, "用户查询成功", seller)
 }
 

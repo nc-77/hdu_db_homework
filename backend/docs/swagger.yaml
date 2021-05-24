@@ -14,24 +14,6 @@ info:
   version: "1.0"
 paths:
   /buyer:
-    get:
-      consumes:
-      - multipart/form-data
-      description: 根据token获取买家个人信息
-      responses:
-        "200":
-          description: '{"code":"200","msg": "用户查询成功","data":""}'
-          schema:
-            type: string
-        "400":
-          description: '{"code":"400","msg": "用户查询失败","data":""}'
-          schema:
-            type: string
-      security:
-      - ApiKeyAuth: []
-      summary: 查询买家个人信息
-      tags:
-      - buyer
     put:
       consumes:
       - multipart/form-data
@@ -89,6 +71,25 @@ paths:
           schema:
             type: string
       summary: 买家登录
+      tags:
+      - buyer
+  /buyer/myself:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据token获取买家个人信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询买家个人信息
       tags:
       - buyer
   /buyer/register:
@@ -279,7 +280,13 @@ paths:
     get:
       consumes:
       - multipart/form-data
-      description: 根据token获取卖家个人信息
+      description: 根据id获取卖家个人信息
+      parameters:
+      - description: 卖家id
+        in: query
+        name: seller_id
+        required: true
+        type: integer
       responses:
         "200":
           description: '{"code":"200","msg": "用户查询成功","data":""}'
@@ -351,6 +358,25 @@ paths:
           schema:
             type: string
       summary: 卖家登录
+      tags:
+      - seller
+  /seller/myself:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据token获取卖家个人信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询卖家个人信息
       tags:
       - seller
   /seller/register:
