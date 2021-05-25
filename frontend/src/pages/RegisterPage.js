@@ -1,4 +1,4 @@
-import GetFormData from "../utils/GetFormData";
+import getFormData from "../utils/getFormData";
 import useForm from "../components/useForm";
 import "./RegisterPage.css";
 import React from "react";
@@ -18,7 +18,7 @@ export default function Register() {
   const submitCallback = () => {
     axios.post(
       `http://localhost:8080/api/${Info.identity}/register`,
-      GetFormData(Info)
+      getFormData(Info)
     );
   };
 

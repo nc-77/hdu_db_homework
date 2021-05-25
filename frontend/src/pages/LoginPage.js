@@ -1,7 +1,7 @@
 import useForm from "../components/useForm";
 import React from "react";
 import axios from "axios";
-import getFormData from "../utils/GetFormData";
+import getFormData from "../utils/getFormData";
 import { useHistory } from "react-router";
 import DragonImg from "../assets/images/dragon.jpg";
 import "./LoginPage.css";

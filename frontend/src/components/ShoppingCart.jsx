@@ -84,19 +84,19 @@ export default function ShoppingCart({
       <CardActions disableSpacing>
         <input
           className="card-form-input"
-          type="text"
+          type="number"
           id="number"
           placeholder="物品数量"
           value={"" || orderInfo.number}
           onChange={OrderHandleChange}
         />
-        <label htmlFor="">交易日期</label>
+        <label htmlFor="">线下交易日</label>
         <input
           className="card-form-input"
           type="date"
-          id="tradeDate"
+          id="trade_date"
           placeholder="物品名称"
-          value={orderInfo.tradeDate || ""}
+          value={orderInfo.trade_date || ""}
           onChange={OrderHandleChange}
         />
 

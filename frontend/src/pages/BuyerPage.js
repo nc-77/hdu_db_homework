@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../features/Navbar";
 import { useHistory } from "react-router";
-import GetFormData from "../utils/GetFormData";
+import getFormData from "../utils/getFormData";
 import useForm from "../components/useForm";
 
 export default function BuyerPage(props) {
@@ -26,7 +26,7 @@ export default function BuyerPage(props) {
       axios
         .put(
           `http://localhost:8080/api/buyer`,
-          GetFormData(personalCenterInfo),
+          getFormData(personalCenterInfo),
           {
             headers: {
               Authorization: `Bear ${user_buyer_token}`,
@@ -69,7 +69,7 @@ export default function BuyerPage(props) {
         params: { name: item.target.ariaLabel },
       })
       .then((res) => {
-        orderInfo.id = res.data.data[0].id;
+        orderInfo.good_id = res.data.data[0].id;
         // 更新cart状态后会重新刷一次，所以要把赋值语句放上面
         setCartInfo(res.data.data);
         setShowCart(true);
@@ -77,7 +77,16 @@ export default function BuyerPage(props) {
   };
 
   const orderSubmitCallback = () => {
-    console.log(orderInfo);
+    const user_buyer_token = localStorage.getItem("user_token_buyer");
+    axios
+      .post(`http://localhost:8080/api/order`, getFormData(orderInfo), {
+        headers: {
+          Authorization: `Bear ${user_buyer_token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   const [isMarketRender, setIsMarketRender] = useState(false);
@@ -85,9 +94,9 @@ export default function BuyerPage(props) {
   const [cartInfo, setCartInfo] = useState();
   const [showCart, setShowCart] = useState(false);
   const orderData = {
-    id: "",
-    tradeDate: "",
-    number: "",
+    good_id: "",
+    trade_date: "",
+    number: 1,
   };
   const [orderInfo, OrderHandleChange, OrderHandleSubmit, setOrderInfo] =
     useForm(orderData, orderSubmitCallback);
@@ -154,6 +163,7 @@ export default function BuyerPage(props) {
       });
     axios.get("http://localhost:8080/api/good/all").then((res) => {
       setMarketInfo(res.data.data);
+
       setIsMarketRender(true);
     });
   }, [setPersonalCenterInfo]);
