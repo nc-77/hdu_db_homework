@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Market from "../components/Market";
-import PersonalCenter from "../components/PersonalCenter";
 import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
+import PersonalCenter from "../components/PersonalCenter";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
+import SellerPage from "../pages/SellerPage";
+import PutOnProduct from "../components/PutOnProduct";
 
 const ROUTES = [
   {
@@ -80,13 +82,34 @@ const ROUTES = [
         path: "/seller",
         key: "SELLER_ROOT",
         exact: true,
-        component: () => <h1>App Index</h1>,
+        component: () => <SellerPage />,
+      },
+
+      {
+        path: "/seller/putOnProduct",
+        key: "SELLER_PUTONPRODUCT",
+        exact: true,
+        component: () => (
+          <SellerPage>
+            <PutOnProduct />
+          </SellerPage>
+        ),
+      },
+      {
+        path: "/seller/order",
+        key: "SELLER_ORDER",
+        exact: true,
+        component: () => <SellerPage />,
       },
       {
         path: "/seller/personalCenter",
-        key: "SELLER_PAGE",
+        key: "SELLER_PERSONALCENTER",
         exact: true,
-        component: () => <h1>App Page</h1>,
+        component: () => (
+          <SellerPage>
+            <PersonalCenter />
+          </SellerPage>
+        ),
       },
     ],
   },

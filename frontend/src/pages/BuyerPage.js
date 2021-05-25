@@ -6,8 +6,6 @@ import getFormData from "../utils/getFormData";
 import useForm from "../components/useForm";
 
 export default function BuyerPage(props) {
-  let RouterHistory = useHistory();
-
   /*    个人中心    */
 
   const [isEdit, setIsEdit] = useState(false);
@@ -16,6 +14,7 @@ export default function BuyerPage(props) {
   const personalCenterSubmitCallback = () => {
     if (!isEdit) {
       setPersonalCenterInfo({
+        username: personalCenterInfo.username,
         name: personalCenterInfo.name,
         nickname: personalCenterInfo.nickname,
         phone: personalCenterInfo.phone,
@@ -110,6 +109,8 @@ export default function BuyerPage(props) {
   /*    市场    */
 
   /*    导航栏    */
+
+  let RouterHistory = useHistory();
 
   const [NavItem] = useState([
     [

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
     width: "100vh",
-    height: "90vh",
+    height: "92vh",
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
