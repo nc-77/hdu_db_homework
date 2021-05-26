@@ -12,7 +12,7 @@ type Order struct {
 	Number    float32        `json:"number" form:"number"`
 	BuyerId   int            `json:"buyer_id" form:"buyer_id"`
 	TradeDate string         `json:"trade_date" form:"trade_date"`
-	Status    int            `json:"sellerId" form:"sellerId" `
+	Status    int            `json:"status" form:"status" `
 	Evaluate  int            `json:"evaluate" from:"evaluate" gorm:"default:-1"`
 	CreatedAt time.Time      `json:"created_at" `
 	UpdatedAt time.Time      `json:"updated_at" `

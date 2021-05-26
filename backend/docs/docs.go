@@ -445,6 +445,68 @@ var doc = `{
                 }
             }
         },
+        "/order/buyer": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "买家登录后(需要token)通过该接口查询个人订单信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "买家查询个人订单",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"订单查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"订单查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/seller": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "卖家登录后(需要token)通过该接口查询个人订单信息",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "卖家查询个人订单",
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"订单查询成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"订单查询失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/seller": {
             "get": {
                 "security": [

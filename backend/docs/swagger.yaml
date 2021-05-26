@@ -280,6 +280,44 @@ paths:
       summary: 买家下单
       tags:
       - order
+  /order/buyer:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 买家登录后(需要token)通过该接口查询个人订单信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "订单查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "订单查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 买家查询个人订单
+      tags:
+      - order
+  /order/seller:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 卖家登录后(需要token)通过该接口查询个人订单信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "订单查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "订单查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 卖家查询个人订单
+      tags:
+      - order
   /seller:
     get:
       consumes:
