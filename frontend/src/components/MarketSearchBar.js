@@ -13,7 +13,7 @@ export default function MarketSearchBar({
         <input
           className="form-input"
           type="text"
-          id="name"
+          name="name"
           placeholder="物品名称"
           value={searchParams.name || ""}
           onChange={MarketHandleChange}
@@ -23,7 +23,7 @@ export default function MarketSearchBar({
         <label className="market-form-label">选择类别</label>
         <select
           className="form-input"
-          id="label"
+          name="label"
           onChange={MarketHandleChange}
           value={searchParams.label || ""}
         >

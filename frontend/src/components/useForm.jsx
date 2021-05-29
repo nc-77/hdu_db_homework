@@ -6,7 +6,7 @@ const useForm = (defaultState, submitCallback) => {
   const handleChange = (e) => {
     setInfo({
       ...Info,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 

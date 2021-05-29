@@ -11,7 +11,7 @@ button.MuiButtonBase-root {
   border: #333 1px solid;
   border-radius: 5px;
   display: block;
-  margin: 0 auto;
+  margin: 5px auto;
   cursor: pointer;
 }
 

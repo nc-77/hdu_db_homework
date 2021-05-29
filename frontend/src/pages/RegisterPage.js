@@ -123,7 +123,7 @@ export default function Register() {
             <input
               className="form-input"
               type="text"
-              id="username"
+              name="username"
               placeholder="8位学号"
               value={Info.username || ""}
               onChange={handleChange}
@@ -135,7 +135,7 @@ export default function Register() {
               type="text"
               className="form-input"
               autoComplete="on"
-              id="name"
+              name="name"
               placeholder="输入中文姓名"
               value={Info.name || ""}
               onChange={handleChange}
@@ -146,7 +146,7 @@ export default function Register() {
             <input
               className="form-input"
               type="password"
-              id="password"
+              name="password"
               placeholder="输入密码"
               value={Info.password || ""}
               onChange={handleChange}
@@ -157,7 +157,7 @@ export default function Register() {
             <input
               className="form-input"
               type="password"
-              id="password2"
+              name="password2"
               placeholder="确认密码"
               onChange={handleChange}
             />
@@ -168,7 +168,7 @@ export default function Register() {
               type="text"
               className="form-input"
               autoComplete="on"
-              id="phone"
+              name="phone"
               placeholder="手机号"
               value={Info.phone || ""}
               onChange={handleChange}
@@ -180,7 +180,7 @@ export default function Register() {
               type="text"
               className="form-input"
               autoComplete="on"
-              id="nickname"
+              name="nickname"
               placeholder="随便填～"
               value={Info.nickname || ""}
               onChange={handleChange}
@@ -190,7 +190,7 @@ export default function Register() {
             <label className="form-label">选择身份</label>
             <select
               className="form-input"
-              id="identity"
+              name="identity"
               onChange={handleChange}
               value={Info.identity || ""}
             >

@@ -46,7 +46,7 @@ export default function Login() {
             <input
               className="form-input-loginPage"
               type="text"
-              id="username"
+              name="username"
               placeholder="8位学号"
               value={Info.username || "" || ""}
               onChange={handleChange}
@@ -57,7 +57,7 @@ export default function Login() {
             <input
               className="form-input-loginPage"
               type="password"
-              id="password"
+              name="password"
               placeholder="输入密码"
               value={Info.password || ""}
               onChange={handleChange}
@@ -67,7 +67,7 @@ export default function Login() {
             <label className="form-label">选择身份</label>
             <select
               className="form-input-loginPage"
-              id="identity"
+              name="identity"
               onChange={handleChange}
               value={Info.identity || ""}
             >

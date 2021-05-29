@@ -79,6 +79,7 @@ export default function SellerPage(props) {
   const [isPersonalCenterRender, setIsPersonalCenterRender] = useState(false);
 
   const personalCenterSubmitCallback = () => {
+    console.log(1);
     if (!isEdit) {
       setPersonalCenterInfo({
         username: personalCenterInfo.username,
@@ -86,20 +87,21 @@ export default function SellerPage(props) {
         nickname: personalCenterInfo.nickname,
         phone: personalCenterInfo.phone,
       });
+
       setIsEdit(true);
     } else {
-      const user_seller_token = localStorage.getItem("user_token_seller");
+      const user_buyer_token = localStorage.getItem("user_token_buyer");
       axios
         .put(
-          `http://localhost:8080/api/seller`,
+          `http://localhost:8080/api/buyer`,
           getFormData(personalCenterInfo),
           {
             headers: {
-              Authorization: `Bear ${user_seller_token}`,
+              Authorization: `Bear ${user_buyer_token}`,
             },
           }
         )
-        .finally(() => {
+        .then(() => {
           setIsEdit(false);
         });
     }
@@ -113,6 +115,13 @@ export default function SellerPage(props) {
   ] = useForm("", personalCenterSubmitCallback);
 
   /*    个人中心    */
+
+  /* 订单页面 */
+
+  const [orderDisplayData, setOrderDisplayData] = useState(props);
+  const [showSellerOrderCenter, setShowSellerOrderCenter] = useState(false);
+
+  /* 导航栏 */
 
   let RouterHistory = useHistory();
 
@@ -162,6 +171,21 @@ export default function SellerPage(props) {
         setPersonalCenterInfo(data);
         setIsPersonalCenterRender(true);
       });
+
+    axios
+      .get(`http://localhost:8080/api/order/seller`, {
+        headers: {
+          Authorization: `Bear ${user_seller_token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setOrderDisplayData(res.data.data);
+        if (orderDisplayData) {
+          setShowSellerOrderCenter(true);
+        }
+      });
+
     axios
       .get(`http://127.0.0.1:8080/api/good`, {
         headers: {
@@ -193,6 +217,8 @@ export default function SellerPage(props) {
           showManageProductCenter,
           goodsInfo,
           handleGoods,
+          orderDisplayData,
+          showSellerOrderCenter,
         })}
     </>
   );

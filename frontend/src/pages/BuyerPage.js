@@ -12,6 +12,7 @@ export default function BuyerPage(props) {
   const [isPersonalCenterRender, setIsPersonalCenterRender] = useState(false);
 
   const personalCenterSubmitCallback = () => {
+    console.log(1);
     if (!isEdit) {
       setPersonalCenterInfo({
         username: personalCenterInfo.username,
@@ -19,6 +20,7 @@ export default function BuyerPage(props) {
         nickname: personalCenterInfo.nickname,
         phone: personalCenterInfo.phone,
       });
+
       setIsEdit(true);
     } else {
       const user_buyer_token = localStorage.getItem("user_token_buyer");
@@ -32,7 +34,7 @@ export default function BuyerPage(props) {
             },
           }
         )
-        .finally(() => {
+        .then(() => {
           setIsEdit(false);
         });
     }
@@ -141,6 +143,13 @@ export default function BuyerPage(props) {
 
   /*    导航栏    */
 
+  /* 订单 */
+
+  const [orderDisplayData, setOrderDisplayData] = useState(props);
+  const [showBuyerOrderCenter, setShowBuyerOrderCenter] = useState(false);
+
+  /* 订单 */
+
   /* 初始化useEffect */
 
   useEffect(() => {
@@ -161,12 +170,24 @@ export default function BuyerPage(props) {
         setPersonalCenterInfo(data);
         setIsPersonalCenterRender(true);
       });
+    axios
+      .get(`http://localhost:8080/api/order/buyer`, {
+        headers: {
+          Authorization: `Bear ${user_buyer_token}`,
+        },
+      })
+      .then((res) => {
+        setOrderDisplayData(res.data.data);
+        if (orderDisplayData) {
+          setShowBuyerOrderCenter(true);
+        }
+      });
     axios.get("http://localhost:8080/api/good/all").then((res) => {
       setMarketInfo(res.data.data);
 
       setIsMarketRender(true);
     });
-  }, [setPersonalCenterInfo]);
+  }, [setPersonalCenterInfo, setOrderDisplayData]);
 
   return (
     <>
@@ -190,6 +211,9 @@ export default function BuyerPage(props) {
           orderInfo: orderInfo,
           OrderHandleChange: OrderHandleChange,
           OrderHandleSubmit: OrderHandleSubmit,
+          orderDisplayData,
+          setOrderDisplayData,
+          showBuyerOrderCenter,
         })}
     </>
   );

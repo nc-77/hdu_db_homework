@@ -6,6 +6,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import "./TitlebarGridList.css";
+import { CssBaseline } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,34 +60,36 @@ export default function MarketTitlebarGridList({ info, handleChange }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <GridList cellHeight={360} className={classes.gridList}>
-        {info.map((item) => (
-          <GridListTile key={item.id} className={`listTile-${item.id}`}>
-            <img src={item.img_url} alt={item.text} />
-            <aside className={classes.contact}>
-              {item.id}
-              <br />
-              {item.name}
-              <br />
-              {item.label}
-            </aside>
-            <GridListTileBar
-              title={item.name}
-              subtitle={<span>分类 {item.label}</span>}
-              actionIcon={
-                <IconButton
-                  aria-label={`${item.name}`}
-                  className={classes.icon}
-                  onClick={handleChange}
-                >
-                  <AddShoppingCartIcon aria-label={`${item.name}`} />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
+    <CssBaseline>
+      <div className={classes.root}>
+        <GridList cellHeight={360} className={classes.gridList}>
+          {info.map((item) => (
+            <GridListTile key={item.id} className={`listTile-${item.id}`}>
+              <img src={item.img_url} alt={item.text} />
+              <aside className={classes.contact}>
+                {item.id}
+                <br />
+                {item.name}
+                <br />
+                {item.label}
+              </aside>
+              <GridListTileBar
+                title={item.name}
+                subtitle={<span>分类 {item.label}</span>}
+                actionIcon={
+                  <IconButton
+                    aria-label={`${item.name}`}
+                    className={classes.icon}
+                    onClick={handleChange}
+                  >
+                    <AddShoppingCartIcon aria-label={`${item.name}`} />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </div>
+    </CssBaseline>
   );
 }

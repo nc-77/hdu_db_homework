@@ -8,6 +8,8 @@ import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import SellerPage from "../pages/SellerPage";
 import ManageProductCenter from "../components/ManageProductCenter";
+import BuyerOrderCenter from "../components/BuyerOrderCenter";
+import SellerOrderCenter from "../components/SellerOrderCenter";
 
 const ROUTES = [
   {
@@ -55,7 +57,7 @@ const ROUTES = [
         exact: true,
         component: () => (
           <BuyerPage>
-            <h1>1</h1>
+            <BuyerOrderCenter />
           </BuyerPage>
         ),
       },
@@ -99,7 +101,11 @@ const ROUTES = [
         path: "/seller/order",
         key: "SELLER_ORDER",
         exact: true,
-        component: () => <SellerPage />,
+        component: () => (
+          <SellerPage>
+            <SellerOrderCenter />
+          </SellerPage>
+        ),
       },
       {
         path: "/seller/personalCenter",

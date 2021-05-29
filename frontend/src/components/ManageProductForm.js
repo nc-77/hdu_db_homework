@@ -16,7 +16,7 @@ export default function ManageProductForm({
         <input
           className="form-input"
           type="text"
-          id="name"
+          name="name"
           placeholder="商品名"
           value={uploadInfo.name || ""}
           onChange={uploadProductHandleChange}
@@ -27,7 +27,7 @@ export default function ManageProductForm({
         <input
           className="form-input"
           type="text"
-          id="price"
+          name="price"
           placeholder="商品价格"
           value={uploadInfo.price || ""}
           onChange={uploadProductHandleChange}
@@ -37,7 +37,7 @@ export default function ManageProductForm({
         <label className="market-form-label">选择类别</label>
         <select
           className="form-input"
-          id="label"
+          name="label"
           onChange={uploadProductHandleChange}
           value={uploadInfo.label || ""}
         >
@@ -52,7 +52,7 @@ export default function ManageProductForm({
         <input
           className="form-input"
           type="number"
-          id="number"
+          name="number"
           placeholder="商品数量"
           value={uploadInfo.number || ""}
           onChange={uploadProductHandleChange}
@@ -63,7 +63,7 @@ export default function ManageProductForm({
         <input
           className="form-input"
           type="text"
-          id="text"
+          name="text"
           placeholder="商品描述"
           value={uploadInfo.text || ""}
           onChange={uploadProductHandleChange}

@@ -85,16 +85,16 @@ export default function ShoppingCart({
         <input
           className="card-form-input"
           type="number"
-          id="number"
+          name="number"
           placeholder="物品数量"
           value={"" || orderInfo.number}
           onChange={OrderHandleChange}
         />
-        <label htmlFor="">线下交易日</label>
+        <label htmlFor="">交易时间</label>
         <input
           className="card-form-input"
           type="date"
-          id="trade_date"
+          name="trade_date"
           placeholder="物品名称"
           value={orderInfo.trade_date || ""}
           onChange={OrderHandleChange}
