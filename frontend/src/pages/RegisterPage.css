@@ -153,3 +153,7 @@
   color: #27cdff;
   font-weight: 600;
 }
+
+.form-input-login a:hover {
+  cursor: pointer;
+}

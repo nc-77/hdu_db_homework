@@ -79,7 +79,15 @@ export default function Login() {
             登录
           </button>
           <span className="form-input-login">
-            没有账号就<a href="/register">注册</a>吧～
+            没有账号就
+            <a
+              onClick={() => {
+                RouterHistory.push("/register");
+              }}
+            >
+              注册
+            </a>
+            吧～
           </span>
         </form>
       </div>

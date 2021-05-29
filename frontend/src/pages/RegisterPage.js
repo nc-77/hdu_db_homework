@@ -4,6 +4,7 @@ import "./RegisterPage.css";
 import React from "react";
 import axios from "axios";
 import DragonImg from "../assets/images/dragon.jpg";
+import { useHistory } from "react-router";
 
 const data = {
   username: "",
@@ -15,6 +16,7 @@ const data = {
 };
 
 export default function Register() {
+  let RouterHistory = useHistory();
   const submitCallback = () => {
     axios.post(
       `http://localhost:8080/api/${Info.identity}/register`,
@@ -202,7 +204,15 @@ export default function Register() {
             注册
           </button>
           <span className="form-input-login">
-            有账号就<a href="/login">登录</a>吧～
+            有账号就
+            <a
+              onClick={() => {
+                RouterHistory.push("/login");
+              }}
+            >
+              登录
+            </a>
+            吧～
           </span>
         </form>
       </div>
