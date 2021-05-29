@@ -7,7 +7,7 @@ import PersonalCenter from "../components/PersonalCenter";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import SellerPage from "../pages/SellerPage";
-import PutOnProduct from "../components/PutOnProduct";
+import ManageProductCenter from "../components/ManageProductCenter";
 
 const ROUTES = [
   {
@@ -91,7 +91,7 @@ const ROUTES = [
         exact: true,
         component: () => (
           <SellerPage>
-            <PutOnProduct />
+            <ManageProductCenter />
           </SellerPage>
         ),
       },

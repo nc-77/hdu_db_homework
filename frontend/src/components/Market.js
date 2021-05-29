@@ -5,7 +5,7 @@ import MarketSearchBar from "./MarketSearchBar";
 import ShoppingCart from "./ShoppingCart";
 
 export default function Market({
-  MarketInfo,
+  marketInfo,
   isMarketRender,
   MarketHandleChange,
   MarketHandleSubmit,
@@ -22,8 +22,9 @@ export default function Market({
       {isMarketRender && (
         <>
           <MarketTitlebarGridList
-            MarketInfo={MarketInfo}
-            handleCart={handleCart}
+            info={marketInfo}
+            handleChange={handleCart}
+            ButtonIcon={`AddShoppingCartIcon`}
           />
           <div className="market-search-params">
             <MarketSearchBar

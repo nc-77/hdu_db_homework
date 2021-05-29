@@ -4,7 +4,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import EditIcon from "@material-ui/icons/Edit";
 import "./TitlebarGridList.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
  * ];
  */
 
-export default function MarketTitlebarGridList({ info, handleChange }) {
+export default function ManageProductTitlebarGridList({ info, handleChange }) {
   const classes = useStyles();
 
   return (
@@ -80,7 +80,7 @@ export default function MarketTitlebarGridList({ info, handleChange }) {
                   className={classes.icon}
                   onClick={handleChange}
                 >
-                  <AddShoppingCartIcon aria-label={`${item.name}`} />
+                  <EditIcon aria-label={`${item.name}`} />
                 </IconButton>
               }
             />

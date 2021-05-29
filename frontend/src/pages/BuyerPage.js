@@ -75,6 +75,10 @@ export default function BuyerPage(props) {
       });
   };
 
+  const [isMarketRender, setIsMarketRender] = useState(false);
+  const [marketInfo, setMarketInfo] = useState(props);
+  const [cartInfo, setCartInfo] = useState();
+  const [showCart, setShowCart] = useState(false);
   const orderSubmitCallback = () => {
     const user_buyer_token = localStorage.getItem("user_token_buyer");
     axios
@@ -87,11 +91,6 @@ export default function BuyerPage(props) {
         console.log(res);
       });
   };
-
-  const [isMarketRender, setIsMarketRender] = useState(false);
-  const [marketInfo, setMarketInfo] = useState(props);
-  const [cartInfo, setCartInfo] = useState();
-  const [showCart, setShowCart] = useState(false);
   const orderData = {
     good_id: "",
     trade_date: "",
@@ -179,7 +178,7 @@ export default function BuyerPage(props) {
           isEdit: isEdit,
           isPersonalCenterRender: isPersonalCenterRender,
           personalCenterHandleChange: personalCenterHandleChange,
-          MarketInfo: marketInfo,
+          marketInfo: marketInfo,
           isMarketRender: isMarketRender,
           MarketHandleChange: MarketHandleChange,
           MarketHandleSubmit: MarketHandleSubmit,
