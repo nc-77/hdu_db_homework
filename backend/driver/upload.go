@@ -24,7 +24,7 @@ type aliOssCfg struct {
 }
 
 func (oss *aliOssCfg) init() error {
-	filename := "./driver/aliOss.ini"
+	filename := "./config/aliOss.ini"
 	cfg, err := ini.Load(filename)
 	if err != nil {
 		return errors.Wrap(err, fmt.Sprintf("load %s failed\n", filename))

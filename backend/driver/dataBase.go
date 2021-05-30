@@ -13,7 +13,7 @@ var (
 )
 
 func CreateDbConnection() error {
-	filename := "./driver/dataBase.ini"
+	filename := "./config/dataBase.ini"
 	/* 读取配置文件 */
 	cfg, err := ini.Load(filename)
 	if err != nil {
