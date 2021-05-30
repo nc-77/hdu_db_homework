@@ -5,6 +5,7 @@ import (
 	"hdu_db_homework/driver"
 	"hdu_db_homework/service"
 	"hdu_db_homework/utils"
+	"strconv"
 )
 
 var (
@@ -33,7 +34,11 @@ func orderBuyerGetHandle(c *gin.Context) {
 		utils.FailResponse(c, utils.OrderAddError)
 		return
 	}
-	utils.SucResponse(c, "订单查询成功", orders)
+	retOrders := make([]service.RetOrder, len(orders))
+	for i, order := range orders {
+		retOrders[i] = order.NewRetOrder()
+	}
+	utils.SucResponse(c, "订单查询成功", retOrders)
 }
 
 // @Security ApiKeyAuth
@@ -58,7 +63,11 @@ func orderSellerGetHandle(c *gin.Context) {
 		utils.FailResponse(c, utils.OrderAddError)
 		return
 	}
-	utils.SucResponse(c, "订单查询成功", orders)
+	retOrders := make([]service.RetOrder, len(orders))
+	for i, order := range orders {
+		retOrders[i] = order.NewRetOrder()
+	}
+	utils.SucResponse(c, "订单查询成功", retOrders)
 }
 
 // @Security ApiKeyAuth
@@ -94,4 +103,38 @@ func orderAddHandle(c *gin.Context) {
 		return
 	}
 	utils.SucResponse(c, "订单添加成功", order)
+}
+
+// @Security ApiKeyAuth
+// @Summary 买家确认收货,修改订单状态
+// @Description 买家登录后(需要token)通过该接口确认收货
+// @Tags order
+// @Accept mpfd
+// @Param order_id formData string true "订单id"
+// @Success 200 {string} json "{"code":"200","msg": "确认收货成功","data":""}"
+// @Failure 400 {string} json "{"code":"400","msg": "确认收货失败","data":""}"
+// @Router /order/status [put]
+func orderStatusHandle(c *gin.Context) {
+	var order service.Order
+	buyerId, _ := c.Get("id")
+	scopeGet, _ := c.Get("scope")
+	order.ID, _ = strconv.Atoi(c.PostForm("order_id"))
+	order.BuyerId, _ = buyerId.(int)
+	scope, _ := scopeGet.(string)
+	order.Status = notFinished
+	// 权限验证
+	if scope != "buyer" && scope != "admin" {
+		utils.FailResponse(c, utils.AuthError)
+		return
+	}
+	// 订单id验证
+	if result := driver.DB.Where("id = ? and buyer_id = ? ", order.ID, order.BuyerId).First(&order); result.Error != nil {
+		utils.FailResponse(c, utils.OrderUpdateError)
+		return
+	}
+	if result := driver.DB.Model(&order).Update("status", 1); result.Error != nil {
+		utils.FailResponse(c, utils.OrderUpdateError)
+		return
+	}
+	utils.SucResponse(c, "确认收货成功", nil)
 }

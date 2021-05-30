@@ -507,6 +507,46 @@ var doc = `{
                 }
             }
         },
+        "/order/status": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "买家登录后(需要token)通过该接口确认收货",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "买家确认收货,修改订单状态",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "订单id",
+                        "name": "order_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"code\":\"200\",\"msg\": \"确认收货成功\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "{\"code\":\"400\",\"msg\": \"确认收货失败\",\"data\":\"\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/seller": {
             "get": {
                 "security": [
