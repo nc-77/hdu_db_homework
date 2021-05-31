@@ -30,7 +30,8 @@ func orderBuyerGetHandle(c *gin.Context) {
 		utils.FailResponse(c, utils.AuthError)
 		return
 	}
-	if result := driver.DB.Where("buyer_id <> ?", buyerId).Find(&orders); result.Error != nil {
+	//fmt.Println(buyerId)
+	if result := driver.DB.Where("buyer_id = ?", buyerId).Find(&orders); result.Error != nil {
 		utils.FailResponse(c, utils.OrderAddError)
 		return
 	}
