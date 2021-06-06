@@ -4,6 +4,7 @@ import Navbar from "../features/Navbar";
 import { useHistory } from "react-router";
 import getFormData from "../utils/getFormData";
 import useForm from "../components/useForm";
+import api from "../index.js";
 
 export default function BuyerPage(props) {
   /*    个人中心    */
@@ -12,7 +13,6 @@ export default function BuyerPage(props) {
   const [isPersonalCenterRender, setIsPersonalCenterRender] = useState(false);
 
   const personalCenterSubmitCallback = () => {
-    console.log(1);
     if (!isEdit) {
       setPersonalCenterInfo({
         username: personalCenterInfo.username,
@@ -25,17 +25,14 @@ export default function BuyerPage(props) {
     } else {
       const user_buyer_token = localStorage.getItem("user_token_buyer");
       axios
-        .put(
-          `http://localhost:8080/api/buyer`,
-          getFormData(personalCenterInfo),
-          {
-            headers: {
-              Authorization: `Bear ${user_buyer_token}`,
-            },
-          }
-        )
-        .then(() => {
+        .put(`${api}/buyer`, getFormData(personalCenterInfo), {
+          headers: {
+            Authorization: `Bear ${user_buyer_token}`,
+          },
+        })
+        .then((res) => {
           setIsEdit(false);
+          alert(res.data.msg);
         });
     }
   };
@@ -53,25 +50,22 @@ export default function BuyerPage(props) {
   const marketSubmitCallback = () => {
     //axios.get().then((res) => {setMarketInfo(res)});
     axios
-      .get(`http://localhost:8080/api/good/filter`, {
+      .get(`${api}/good/filter`, {
         params: { name: searchParams.name, label: searchParams.label },
       })
       .then((res) => {
+        alert(res.data.msg);
         setMarketInfo(res.data.data);
-        console.log(res);
       });
-    console.log(searchParams);
   };
 
   const handleCart = (item) => {
-    console.log(item.target.ariaLabel);
     axios
-      .get(`http://localhost:8080/api/good/filter`, {
+      .get(`${api}/good/filter`, {
         params: { name: item.target.ariaLabel },
       })
       .then((res) => {
         orderInfo.good_id = res.data.data[0].id;
-        // 更新cart状态后会重新刷一次，所以要把赋值语句放上面
         setCartInfo(res.data.data);
         setShowCart(true);
       });
@@ -84,13 +78,13 @@ export default function BuyerPage(props) {
   const orderSubmitCallback = () => {
     const user_buyer_token = localStorage.getItem("user_token_buyer");
     axios
-      .post(`http://localhost:8080/api/order`, getFormData(orderInfo), {
+      .post(`${api}/order`, getFormData(orderInfo), {
         headers: {
           Authorization: `Bear ${user_buyer_token}`,
         },
       })
       .then((res) => {
-        console.log(res);
+        alert(res.data.msg);
       });
   };
   const orderData = {
@@ -147,7 +141,6 @@ export default function BuyerPage(props) {
 
   const [orderDisplayData, setOrderDisplayData] = useState(props);
   const [showBuyerOrderCenter, setShowBuyerOrderCenter] = useState(false);
-
   /* 订单 */
 
   /* 初始化useEffect */
@@ -155,7 +148,7 @@ export default function BuyerPage(props) {
   useEffect(() => {
     const user_buyer_token = localStorage.getItem("user_token_buyer");
     axios
-      .get(`http://localhost:8080/api/buyer/myself`, {
+      .get(`${api}/buyer/myself`, {
         headers: {
           Authorization: `Bear ${user_buyer_token}`,
         },
@@ -171,7 +164,7 @@ export default function BuyerPage(props) {
         setIsPersonalCenterRender(true);
       });
     axios
-      .get(`http://localhost:8080/api/order/buyer`, {
+      .get(`${api}/order/buyer`, {
         headers: {
           Authorization: `Bear ${user_buyer_token}`,
         },
@@ -182,7 +175,7 @@ export default function BuyerPage(props) {
           setShowBuyerOrderCenter(true);
         }
       });
-    axios.get("http://localhost:8080/api/good/all").then((res) => {
+    axios.get(`${api}/good/all`).then((res) => {
       setMarketInfo(res.data.data);
 
       setIsMarketRender(true);

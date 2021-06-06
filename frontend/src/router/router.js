@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import Market from "../components/Market";
 import BuyerPage from "../pages/BuyerPage";
 import Hero from "../pages/Hero";
@@ -39,7 +39,11 @@ const ROUTES = [
         path: "/buyer",
         key: "BUYER_ROOT",
         exact: true,
-        component: () => <BuyerPage />,
+        component: () => (
+          <BuyerPage>
+            <Market />
+          </BuyerPage>
+        ),
       },
       {
         path: "/buyer/personalCenter",
@@ -84,7 +88,11 @@ const ROUTES = [
         path: "/seller",
         key: "SELLER_ROOT",
         exact: true,
-        component: () => <SellerPage />,
+        component: () => (
+          <SellerPage>
+            <ManageProductCenter />
+          </SellerPage>
+        ),
       },
 
       {
@@ -135,13 +143,13 @@ function RouteWithSubRoutes(route) {
 
 export function RenderRoutes({ routes }) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         {routes.map((route, i) => {
           return <RouteWithSubRoutes key={route.key} {...route} />;
         })}
         <Route component={() => <h1>Not Found!</h1>} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

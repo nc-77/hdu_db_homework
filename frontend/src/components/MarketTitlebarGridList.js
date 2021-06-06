@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100vh",
     height: "92vh",
   },
-  /* icon: {
-    color: "rgba(255, 255, 255, 0.54)",
-  }, */
   contact: {
     display: "none",
     position: "absolute",
@@ -37,24 +34,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "25px",
   },
 }));
-
-/**
- * The example data is structured as follows:
- *
- * import image from 'path/to/image.jpg';
- * [etc...]
- *
- * const tileData = [
- *   {
- *     img: image,
- *     title: 'Image',
- *     author: 'author',
- *   },
- *   {
- *     [etc...]
- *   },
- * ];
- */
 
 export default function MarketTitlebarGridList({ info, handleChange }) {
   const classes = useStyles();

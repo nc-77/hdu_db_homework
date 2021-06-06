@@ -4,29 +4,10 @@ import { useHistory } from "react-router";
 import useForm from "../components/useForm";
 import Navbar from "../features/Navbar";
 import getFormData from "../utils/getFormData";
+import api from "../index.js";
 
 export default function SellerPage(props) {
   /* 上架商品 */
-
-  /* const orderSubmitCallback = () => {
-    const user_buyer_token = localStorage.getItem("user_token_buyer");
-    axios
-      .post(`http://localhost:8080/api/order`, getFormData(orderInfo), {
-        headers: {
-          Authorization: `Bear ${user_buyer_token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
-  };
-  const goodsData = {
-    good_id: "",
-    trade_date: "",
-    number: 1,
-  };
-  const [goodsInfo, OrderHandleChange, OrderHandleSubmit, setOrderInfo] =
-    useForm(goodsData, orderSubmitCallback); */
 
   const [goodsInfo, setGoodsInfo] = useState(props);
   console.log(goodsInfo);
@@ -39,20 +20,16 @@ export default function SellerPage(props) {
     const user_seller_token = localStorage.getItem("user_token_seller");
     console.log(user_seller_token);
     axios
-      .post(`http://localhost:8080/api/good`, getFormData(uploadInfo), {
+      .post(`${api}/good`, getFormData(uploadInfo), {
         headers: {
           Authorization: `Bear ${user_seller_token}`,
         },
       })
       .then((res) => {
-        console.log(res);
+        alert(res.data.msg);
       });
-    console.log(1);
   };
 
-  const handleUpload = () => {
-    console.log(1);
-  };
   const uploadInfoData = {
     name: "",
     price: "",
@@ -62,14 +39,13 @@ export default function SellerPage(props) {
     file: "",
   };
   const [showManageProductCenter, setShowManageProductCenter] = useState(false);
-  const [showUpload, ShowUpload] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
   const [
     uploadInfo,
     uploadProductHandleChange,
     uploadProductSubmit,
     setUploadInfo,
   ] = useForm(uploadInfoData, uploadProductSubmitCallback);
-  console.log(uploadInfo);
 
   /* 上架商品 */
 
@@ -79,7 +55,6 @@ export default function SellerPage(props) {
   const [isPersonalCenterRender, setIsPersonalCenterRender] = useState(false);
 
   const personalCenterSubmitCallback = () => {
-    console.log(1);
     if (!isEdit) {
       setPersonalCenterInfo({
         username: personalCenterInfo.username,
@@ -92,17 +67,14 @@ export default function SellerPage(props) {
     } else {
       const user_buyer_token = localStorage.getItem("user_token_buyer");
       axios
-        .put(
-          `http://localhost:8080/api/buyer`,
-          getFormData(personalCenterInfo),
-          {
-            headers: {
-              Authorization: `Bear ${user_buyer_token}`,
-            },
-          }
-        )
-        .then(() => {
+        .put(`${api}/seller`, getFormData(personalCenterInfo), {
+          headers: {
+            Authorization: `Bear ${user_buyer_token}`,
+          },
+        })
+        .then((res) => {
           setIsEdit(false);
+          alert(res.data.msg);
         });
     }
   };
@@ -156,7 +128,7 @@ export default function SellerPage(props) {
   useEffect(() => {
     const user_seller_token = localStorage.getItem("user_token_seller");
     axios
-      .get(`http://localhost:8080/api/seller/myself`, {
+      .get(`${api}/seller/myself`, {
         headers: {
           Authorization: `Bear ${user_seller_token}`,
         },
@@ -173,7 +145,7 @@ export default function SellerPage(props) {
       });
 
     axios
-      .get(`http://localhost:8080/api/order/seller`, {
+      .get(`${api}/order/seller`, {
         headers: {
           Authorization: `Bear ${user_seller_token}`,
         },
@@ -187,7 +159,7 @@ export default function SellerPage(props) {
       });
 
     axios
-      .get(`http://127.0.0.1:8080/api/good`, {
+      .get(`${api}/good`, {
         headers: {
           Authorization: `Bear ${user_seller_token}`,
         },
@@ -211,7 +183,6 @@ export default function SellerPage(props) {
           uploadInfo,
           uploadProductHandleChange,
           uploadProductSubmit,
-          handleUpload,
           setUploadInfo,
           showUpload,
           showManageProductCenter,

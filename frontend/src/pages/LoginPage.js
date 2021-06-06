@@ -5,6 +5,7 @@ import getFormData from "../utils/getFormData";
 import { useHistory } from "react-router";
 import DragonImg from "../assets/images/dragon.jpg";
 import "./LoginPage.css";
+import api from "../index.js";
 
 const data = {
   username: "",
@@ -17,10 +18,7 @@ export default function Login() {
 
   const submitCallback = () => {
     axios
-      .post(
-        `http://localhost:8080/api/${Info.identity}/login`,
-        getFormData(Info)
-      )
+      .post(`${api}/${Info.identity}/login`, getFormData(Info))
       .then((res) => {
         const responseData = JSON.parse(res.request.response);
         const token = responseData.data.token;
@@ -29,6 +27,7 @@ export default function Login() {
         if (status) {
           RouterHistory.push(`/${Info.identity}`);
         }
+        alert(res.data.msg);
       });
   };
 

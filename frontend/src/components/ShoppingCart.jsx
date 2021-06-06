@@ -105,9 +105,6 @@ export default function ShoppingCart({
           购买
         </button>
       </CardActions>
-      {/* <CardActions className={classes.actions}>
-        <InlineForm />
-      </CardActions> */}
     </Card>
   );
 }

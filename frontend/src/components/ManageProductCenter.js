@@ -6,7 +6,6 @@ export default function ManageProductCenter({
   uploadInfo,
   uploadProductHandleChange,
   uploadProductSubmit,
-  handleUpload,
   showManageProductCenter,
   goodsInfo,
   handleGoods,
@@ -25,14 +24,6 @@ export default function ManageProductCenter({
               uploadProductHandleChange={uploadProductHandleChange}
               uploadProductSubmit={uploadProductSubmit}
             />
-            {/* {showUpload && (
-              <ShoppingCart
-                cartInfo={cartInfo}
-                orderInfo={orderInfo}
-                OrderHandleChange={OrderHandleChange}
-                OrderHandleSubmit={OrderHandleSubmit}
-              />
-            )} */}
           </div>
         </>
       )}

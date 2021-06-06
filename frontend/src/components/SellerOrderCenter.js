@@ -14,18 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
-/* function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-} */
+/* "https://source.unsplash.com/random" */
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -55,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1];
-
 export default function SellerOrderCenter({
   orderDisplayData,
   showSellerOrderCenter,
 }) {
   const classes = useStyles();
+
+  console.log(orderDisplayData);
 
   return (
     <>
@@ -90,12 +79,12 @@ export default function SellerOrderCenter({
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
+                      image={`http://pic.nc-77.top/${item.good_id}.jpg`}
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        Heading
+                        货物
                       </Typography>
                       <Typography>{`订单号: ${item.id} `}</Typography>
                       <Typography>{`货物号: ${item.good_id} `}</Typography>
