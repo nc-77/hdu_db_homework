@@ -84,7 +84,7 @@ export default function SellerOrderCenter({
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        货物
+                        {item.good_name ? item.good_name : "货物"}
                       </Typography>
                       <Typography>{`订单号: ${item.id} `}</Typography>
                       <Typography>{`货物号: ${item.good_id} `}</Typography>
