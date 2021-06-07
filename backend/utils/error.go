@@ -17,8 +17,9 @@ var (
 	AuthError        = errors.New("未允许的授权")
 )
 var (
-	FileTypeError   = errors.New("文件类型错误")
-	GoodAddError    = errors.New("商品添加失败")
-	GoodSelectError = errors.New("商品查询失败")
-	OrderAddError   = errors.New("订单添加失败")
+	FileTypeError    = errors.New("文件类型错误")
+	GoodAddError     = errors.New("商品添加失败")
+	GoodSelectError  = errors.New("商品查询失败")
+	OrderAddError    = errors.New("订单添加失败")
+	OrderUpdateError = errors.New("订单修改失败")
 )

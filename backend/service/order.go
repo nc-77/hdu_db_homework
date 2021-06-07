@@ -2,6 +2,7 @@ package service
 
 import (
 	"gorm.io/gorm"
+	"hdu_db_homework/driver"
 
 	"time"
 )
@@ -17,4 +18,17 @@ type Order struct {
 	CreatedAt time.Time      `json:"created_at" `
 	UpdatedAt time.Time      `json:"updated_at" `
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
+}
+
+type RetOrder struct {
+	Order
+	GoodName string ` json:"good_name"`
+}
+
+func (ord *Order) NewRetOrder() (retOrd RetOrder) {
+	retOrd.Order = *ord
+	var good Good
+	driver.DB.Where("id = ?", ord.GoodId).First(&good)
+	retOrd.GoodName = good.Name
+	return
 }

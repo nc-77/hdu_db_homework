@@ -55,7 +55,7 @@ func InitRouter() *gin.Engine {
 		orderGroup.GET("/buyer", middleWare.JwtAuth(), orderBuyerGetHandle)
 		orderGroup.GET("/seller", middleWare.JwtAuth(), orderSellerGetHandle)
 		orderGroup.POST("", middleWare.JwtAuth(), orderAddHandle)
-
+		orderGroup.PUT("/status", middleWare.JwtAuth(), orderStatusHandle)
 	}
 	return r
 }

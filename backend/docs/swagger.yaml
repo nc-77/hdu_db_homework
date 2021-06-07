@@ -318,6 +318,31 @@ paths:
       summary: 卖家查询个人订单
       tags:
       - order
+  /order/status:
+    put:
+      consumes:
+      - multipart/form-data
+      description: 买家登录后(需要token)通过该接口确认收货
+      parameters:
+      - description: 订单id
+        in: formData
+        name: order_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "确认收货成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "确认收货失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 买家确认收货,修改订单状态
+      tags:
+      - order
   /seller:
     get:
       consumes:
