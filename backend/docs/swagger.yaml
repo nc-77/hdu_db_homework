@@ -1,0 +1,494 @@
+basePath: /api
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: me@razeen.me
+    name: www.topgoer.com
+    url: https://www.topgoer.com
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.topgoer.com
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /buyer:
+    put:
+      consumes:
+      - multipart/form-data
+      description: 根据token更新买家个人信息
+      parameters:
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户更新成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户更新失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新买家个人信息
+      tags:
+      - buyer
+  /buyer/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 买家登录
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "登录成功","data":""token":"xxxxxxxxx""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "登录失败","data":""}'
+          schema:
+            type: string
+      summary: 买家登录
+      tags:
+      - buyer
+  /buyer/myself:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据token获取买家个人信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询买家个人信息
+      tags:
+      - buyer
+  /buyer/register:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 买家注册
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户注册成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户创建失败","data":""}'
+          schema:
+            type: string
+      summary: 买家注册
+      tags:
+      - buyer
+  /good:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 查询卖家token查询上架商品信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "商品查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "商品查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询商品信息
+      tags:
+      - good
+    post:
+      consumes:
+      - multipart/form-data
+      description: 根据卖家token添加商品信息,商品图片url默认为http://pic.nc-77.top/商品id.jpg
+      parameters:
+      - description: 商品名
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: 商品价格
+        in: formData
+        name: price
+        required: true
+        type: number
+      - description: 商品分类
+        in: formData
+        name: label
+        required: true
+        type: string
+      - description: 商品数量
+        in: formData
+        name: number
+        required: true
+        type: integer
+      - description: 商品描述
+        in: formData
+        name: text
+        type: string
+      - description: 商品图片
+        in: formData
+        name: file
+        type: file
+      responses:
+        "200":
+          description: '{"code":"200","msg": "商品上架成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "商品上架失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 卖家上传商品信息
+      tags:
+      - good
+  /good/all:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 查询所有商品信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "所有商品查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "所有商品查询失败","data":""}'
+          schema:
+            type: string
+      summary: 查询所有商品信息
+      tags:
+      - good
+  /good/filter:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据id,name,label筛选商品 有id参数时忽略name及label参数
+      parameters:
+      - description: 商品id
+        in: query
+        name: buyer_id
+        type: integer
+      - description: 商品名
+        in: query
+        name: name
+        type: string
+      - description: 商品分类
+        in: query
+        name: label
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "筛选商品成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "筛选商品失败","data":""}'
+          schema:
+            type: string
+      summary: 指定条件筛选商品
+      tags:
+      - good
+  /order:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 买家登录后(需要token)通过该接口下单
+      parameters:
+      - description: 下单商品id
+        in: formData
+        name: good_id
+        required: true
+        type: string
+      - description: 下单商品数量
+        in: formData
+        name: number
+        required: true
+        type: integer
+      - description: 线下交易日期
+        in: formData
+        name: trade_date
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "商品下单成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "商品下单失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 买家下单
+      tags:
+      - order
+  /order/buyer:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 买家登录后(需要token)通过该接口查询个人订单信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "订单查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "订单查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 买家查询个人订单
+      tags:
+      - order
+  /order/seller:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 卖家登录后(需要token)通过该接口查询个人订单信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "订单查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "订单查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 卖家查询个人订单
+      tags:
+      - order
+  /order/status:
+    put:
+      consumes:
+      - multipart/form-data
+      description: 买家登录后(需要token)通过该接口确认收货
+      parameters:
+      - description: 订单id
+        in: formData
+        name: order_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "确认收货成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "确认收货失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 买家确认收货,修改订单状态
+      tags:
+      - order
+  /seller:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据id获取卖家个人信息
+      parameters:
+      - description: 卖家id
+        in: query
+        name: seller_id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询卖家个人信息
+      tags:
+      - seller
+    put:
+      consumes:
+      - multipart/form-data
+      description: 根据token更新卖家个人信息
+      parameters:
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户更新成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户更新失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 更新卖家个人信息
+      tags:
+      - seller
+  /seller/login:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 卖家登录
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "登录成功","data":""token":"xxxxxxxxx""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "登录失败","data":""}'
+          schema:
+            type: string
+      summary: 卖家登录
+      tags:
+      - seller
+  /seller/myself:
+    get:
+      consumes:
+      - multipart/form-data
+      description: 根据token获取卖家个人信息
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户查询成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户查询失败","data":""}'
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: 查询卖家个人信息
+      tags:
+      - seller
+  /seller/register:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 卖家注册
+      parameters:
+      - description: 学号
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: 姓名
+        in: formData
+        name: name
+        type: string
+      - description: 联系方式
+        in: formData
+        name: phone
+        type: string
+      - description: 昵称
+        in: formData
+        name: nickname
+        type: string
+      responses:
+        "200":
+          description: '{"code":"200","msg": "用户注册成功","data":""}'
+          schema:
+            type: string
+        "400":
+          description: '{"code":"400","msg": "用户创建失败","data":""}'
+          schema:
+            type: string
+      summary: 卖家注册
+      tags:
+      - seller
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
