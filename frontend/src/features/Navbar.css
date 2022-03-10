@@ -27,6 +27,10 @@
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
+<<<<<<< HEAD
+=======
+  display: block;
+>>>>>>> c994b8794df4f0a755948196a78729ae007187e0
   text-align: left;
 }
 
