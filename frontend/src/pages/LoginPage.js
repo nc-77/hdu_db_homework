@@ -23,6 +23,7 @@ export default function Login() {
         const responseData = JSON.parse(res.request.response);
         const token = responseData.data.token;
         const status = responseData.code;
+        console.log(res.data);
         localStorage.setItem(`user_token_${Info.identity}`, token);
         if (status) {
           RouterHistory.push(`/${Info.identity}`);
